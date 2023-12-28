@@ -1,4 +1,4 @@
-# **tess-cont**: a Python package to sudy the flux contamination within TESS data
+# *tess-cont*: a Python package to sudy the flux contamination within TESS data
 ## Is it for you?
 **Are you concerned** about the existence of **nearby stars contaminating** your **TESS photometry**? Do you want to figure out **which sources** contaminate the most? and **how much of an impact** they have? Do you want to **correct SAP photometry for crowding** based on widely-used metrics such as CROWDSAP and FLFRCSAP? Do you want to **create custom photometric apertures** that **minimize contamination**? Do you want to **create paper-ready and eye-popping** plots (like the one below) that inform on the **crowding situation** of your favourite targets? For this and more, **tess-cont is your package!**
 
