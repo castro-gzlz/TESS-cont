@@ -53,6 +53,10 @@ The right-hand plot is a **pie chart** representing the flux from the target and
 
 In this example, we study the star TOI-4479. As we can see, the field is **less crowded** (less white disks) but the SPOC photometry is **more contaminated**, with a total contamination fraction of **30.4%**. 
 
+```
+python TESS-cont.py TOI-4479_S41.ini
+```
+
 ![example2](https://github.com/user-attachments/assets/7ca10bde-3f7f-4881-a10a-37195dfd3944)
 
 
