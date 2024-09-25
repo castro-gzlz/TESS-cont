@@ -62,7 +62,7 @@ python TESS-cont.py TOI-4479_S41.ini
 This star was found to have a planet candidate, TOI-4479.01, with a transit depth of 3471 ppm (parts per million) according to [ExoFOP](https://exofop.ipac.caltech.edu/tess/target.php?id=126606859), which was later confirmed to be a planet by [Esparza-Borges et al. (2022)](https://ui.adsabs.harvard.edu/abs/2022A%26A...666A..10E/abstract) with follow-up observations. We here used the *TESS-cont* **DILUTION** feature to know whether we can discard the nearby contaminant sources as being the origin of the signal found based on the TESS photometry alone. 
 
 
-Gaia_ID,TIC_ID,transit_depth(%) <br /> 
+**Gaia_ID,TIC_ID,transit_depth(%)** <br /> 
 1841177816084707584,No TIC ID found,**1.74** <br />
 1841177816084683648,No TIC ID found,**6.01** <br />
 1841178129618984960,No TIC ID found,**8.26** <br />
