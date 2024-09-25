@@ -1,6 +1,6 @@
 # TESS-cont: The TESS contamination tool
 
-*TESS-cont* is a **user-friendly** Python tool (available in script and Jupyter Notebook versions) to **quantify the flux contribution** from **nearby sources** in the **TESS photometry** of any observed target. 
+*TESS-cont* is a **user-friendly** Python tool (available in script and Jupyter Notebook format) to **quantify the flux contribution** from **nearby sources** in the **TESS photometry** of any observed target. 
 
 ## 
 
