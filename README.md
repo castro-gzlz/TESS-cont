@@ -34,7 +34,7 @@ The file *my_config_file.ini* should contain all the necessary information to ma
 
 ## Usage examples
 
-### Example 1: Studying TOI-5005. A planet-hosting star in a relatively crowded field
+### Example 1: The simplest case. A TIC number and a sector to study the planet-hosting star TOI-5005
 
 
 
