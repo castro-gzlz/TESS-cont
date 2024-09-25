@@ -71,5 +71,6 @@ This star was found to have a planet candidate, TOI-4479.01, with a transit dept
 1841177682942388608,No TIC ID found,**27.66**
 ## Configuration file
 
+### Example 3: Many possibilities. Custom apertures, correcting SAP photometry, FFIs, and more. 
 
 
