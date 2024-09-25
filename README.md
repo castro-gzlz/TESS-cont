@@ -34,7 +34,7 @@ The file *my_config_file.ini* should contain all the necessary information to ma
 
 ## Usage examples
 
-### Example 1: The simplest case. A TIC number (and a TESS Sector) is all you need
+### Example 1: The simplest case. A TIC number is all you need
 
 In this example, we specify the **TIC number** of TOI-5005 (282485660) to quantify the different flux contributions to its SPOC photometric aperture in **Sector 65**. By default, *TESS-cont* considers all nearby *Gaia* sources within a radius of 200 arcsecs. 
 
