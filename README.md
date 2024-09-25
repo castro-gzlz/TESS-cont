@@ -16,7 +16,7 @@ If you have any problems with the installation, you can drop an issue [here](htt
 
 ## Usage
 
-*TESS-cont* is **easy** and **intuitive** to use. It **only requires the TIC number** of the target star to study, although it can also have a **flexible operation** based on different [optional parameters](#optional-parameters).
+*TESS-cont* is **easy** and **intuitive** to use. It **only requires the TIC number** of the target star to study, although it can also have a **flexible operation** based on different **optional parameters**.
 
 #### Python through the terminal
 
@@ -25,7 +25,7 @@ You just need to create a configuration file *[my_config_file.ini](https://githu
 ```
 python TESS-cont.py my_config_file.ini
 ```
-The file *[my_config_file.ini](https://github.com/castro-gzlz/mr-plotter/blob/main/config/my_config_file.ini)* should contain all the necessary information to make the analysis, which will be saved into the *[output](https://github.com/castro-gzlz/mr-plotter/tree/main/output)* folder. In the [**Configuration file**](#configuration-file) section we describe **all the parameters** that can be used in the configuration files.
+The file *my_config_file.ini* should contain all the necessary information to make the analysis, which will be saved into the *[output](https://github.com/castro-gzlz/mr-plotter/tree/main/output)* folder. In the [**Configuration file**](#configuration-file) section we describe **all the parameters** that can be used in the configuration files.
 
 
 #### Python through Jupyter Notebook
