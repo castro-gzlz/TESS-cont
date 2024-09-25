@@ -8,7 +8,7 @@ The *TESS-cont* operation is based on building the Pixel Response Functions (PRF
 
 ## Installation & Requirements
 
-Just **clone or download** this folder on your computer. All the dependencies are widely used, so you probably already have them installed. However, if this is not the case, you can just enter the folder via the terminal and type
+**Clone or download** this folder on your computer. All the dependencies are widely used, so you probably already have them installed. However, if this is not the case, you can just enter the folder via the terminal and type
 ```
 pip install -r requirements.txt
 ```
