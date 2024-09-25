@@ -51,7 +51,7 @@ The right-hand plot is a **pie chart** representing the flux from the target and
 
 ### Example 2: Can the nearby stars be the source of the (transit and variability) signals found?
 
-In this example, we study the contamination of TOI-4479. As we can see, the field is less crowded (less white disk) but the SPOC photometry is more contaminated, with a total contamination fraction of 30.4%. 
+In this example, we study the contamination of TOI-4479. As we can see, the field is **less crowded** (less white disk) but the SPOC photometry is **more contaminated**, with a total contamination fraction of **30.4%**. 
 
 
 ## Configuration file
