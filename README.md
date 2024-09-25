@@ -1,6 +1,6 @@
 # TESS-cont: The TESS contamination tool
 
-*TESS-cont* is a **user-friendly** Python tool to **quantify the flux contribution** from **nearby sources** in the **TESS photometry** of any observed star. The *TESS-cont* algorithm **(1)** identifies the main contaminant sources, **(2)** quantifies their individual and total flux contributions to the selected aperture (i.e. SPOC or custom), and **(3)** determines whether any of these stars could be the origin of the observed transit or variability signals. 
+*TESS-cont* is a **user-friendly** Python tool to **quantifies the flux contribution** from **nearby sources** to the **TESS photometry** of any observed star. The *TESS-cont* algorithm **(1)** identifies the main contaminant sources, **(2)** quantifies their individual and total flux contributions to the selected aperture (i.e. SPOC or custom), and **(3)** determines whether any of these stars could be the origin of the observed transit or variability signals. 
 
 ![Presentación sin título(2)-cropped](https://github.com/user-attachments/assets/59ef2a7f-f7db-4c9a-aa74-ec2ff71dc1a7)
 
