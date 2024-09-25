@@ -63,12 +63,12 @@ This star was found to have a planet candidate, TOI-4479.01, with a transit dept
 
 
 Gaia_ID,TIC_ID,transit_depth(%) <br /> 
-1841177816084707584,No TIC ID found,1.74 <br /> 
-1841177816084683648,No TIC ID found,6.01 <br /> 
-1841178129618984960,No TIC ID found,8.26 <br />  
-1841177717302124288,No TIC ID found,11.27 <br /> 
-1841178232698201216,No TIC ID found,24.36 <br /> 
-1841177682942388608,No TIC ID found,27.66 
+1841177816084707584,No TIC ID found,1.74 <br />
+1841177816084683648,No TIC ID found,6.01 <br />
+1841178129618984960,No TIC ID found,8.26 <br />
+1841177717302124288,No TIC ID found,11.27 <br />
+1841178232698201216,No TIC ID found,24.36 <br />
+1841177682942388608,No TIC ID found,27.66
 ## Configuration file
 
 
