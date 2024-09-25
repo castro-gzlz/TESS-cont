@@ -34,6 +34,10 @@ The file *my_config_file.ini* should contain all the necessary information to ma
 
 ## Usage examples
 
+### Example 1: Studying TOI-5005. A planet-hosting star in a relatively crowded field
+
+
+
 ## Configuration file
 
 
