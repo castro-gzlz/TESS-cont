@@ -36,8 +36,7 @@ The file *my_config_file.ini* should contain all the necessary information to ma
 
 ### Example 1: The simplest case. A TIC number (and a sector) to study TOI-5005
 
-In this example, we specify the **TIC number** of TOI-5005 (282485660) to quantify the different flux contributions to its SPOC photometric aperture in Sector 65. By default, *TESS-cont* considers all nearby *Gaia* sources within a radius of 200 arcsecs. This value can be customized in the [OPTIONAL] section.
-
+In this example, we specify the **TIC number** of TOI-5005 (282485660) to quantify the different flux contributions to its SPOC photometric aperture in Sector 65. By default, *TESS-cont* considers all nearby *Gaia* sources within a radius of 200 arcsecs. 
 ```
 python TESS-cont.py TOI-5005_S65.ini
 ```
