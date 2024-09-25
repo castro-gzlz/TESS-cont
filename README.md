@@ -16,7 +16,7 @@ If you have any problems with the installation, you can drop an issue [here](htt
 
 ## Usage
 
-*TESS-cont* is **easy** and **intuitive** to use. It only requires the TIC number of the target star to study, although it can also have a quite flexible operation based on different [optional parameters](#optional-parameters)).
+*TESS-cont* is **easy** and **intuitive** to use. It only requires the TIC number of the target star to study, although it can also have a quite flexible operation based on different [optional parameters](#optional-parameters).
 
 #### Python through the terminal
 
