@@ -34,5 +34,7 @@ The file *[my_config_file.ini](https://github.com/castro-gzlz/mr-plotter/blob/ma
 
 ## Usage examples
 
+## Configuration file
+
 
 
