@@ -39,12 +39,14 @@ The file *my_config_file.ini* should contain all the necessary information to ma
 In this example, we introduce the **TIC number** of TOI-5005 (282485660) to quantify the different flux contributions to its SPOC photometric aperture in Sector 65. By default, *TESS-cont* considers all nearby *Gaia* sources within a radius of 200 arcseconds, although this number can be customized in the [OPTIONAL] section.
 
 ```
-python TESS-cont.py 
+python TESS-cont.py TOI-5005_S65.ini
 ```
 
 The left-hand plot is a **heatmap** indicating **the flux percentage from the target star** falling within each pixel. As we can see, inside the aperture, TOI-5005 contributes between 60% and 90% of the total flux, depending on the considered pixel. 
 
 The right-hand plot is a **pie chart** representing the total flux percentage from the target and nearby stars **inside the photometric aperture**. Overall, **TOI-5005 contributes 84.4%** to the measured photometry, while **the remaining 15.6% comes from different nearby sources**. Of this 15.6% contaminant flux, 43% comes from small contributions of little-contaminant stars, and the remaining 57% comes from the five stars highlighted in both figures. These stars are numbered according to their total flux contribution. Interestingly, the second most contaminant star (Star#2) is a very bright source located outside the TESS TPF. This example illustrates the **usefulness of *TESS-cont* to identify contaminants that could be otherwise overlooked**. 
+
+### Example 2: Can the nearby stars be the source of the (transit and variability) signals found?
 
 
 ## Configuration file
