@@ -4,4 +4,4 @@
 
 ![Presentación sin título(2)-cropped](https://github.com/user-attachments/assets/59ef2a7f-f7db-4c9a-aa74-ec2ff71dc1a7)
 
-To do so, *TESS-cont* builds the Pixel Response Functions (PRFs) of each nearby *Gaia* source and computes the flux distributions across the Target Pixel Files (TPFs) or Full Frame Images (FFIs). A more detailed explanation of its operation can be found in Section 2.1.2 of [this work]().
+The *TESS-cont* operation is based on building the Pixel Response Functions (PRFs) of each nearby *Gaia* source and computing their flux distributions across the Target Pixel Files (TPFs) or Full Frame Images (FFIs). A more detailed description can be found in Section 2.1.2 of [this work]().
