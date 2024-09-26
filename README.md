@@ -91,10 +91,10 @@ Examples 1 and 2 represent the main operation of *TESS-cont*. However, the packa
 
 | Parameter  | Possible values | Description |
 | ------------- | ------------- | ------------- |
-| sector | Any number| TESS sector to be analysed |
-| n_sources | Any number | Number of contaminant sources to study individually |
+| sector | Any number| TESS sector to be analysed. Default: first with observations |
+| n_sources | Any number | Number of contaminant sources to study individually. Default: 5 |
 | gaia_catalog | DR2 or DR3 | Gaia catalog. Default: DR3 |
-| target_name | Any name | Target name |
+| target_name | Any name | Target name. Default: Target |
 | plot_target_name | True or False | Specify the target name in the plots. Default: False|
 | img_fmt | png or pdf | Format of output images. Default: pdf |
 
