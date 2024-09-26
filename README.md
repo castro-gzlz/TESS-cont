@@ -120,4 +120,4 @@ TBC
 ```
 and add the following sentence within the acknowledgements section:
 
-> This publication made use of \texttt{TESS-cont} (\url{https://github.com/castro-gzlz/TESS-cont}), which also made use of \texttt{tpfplotter} \citep{2020A&A...635A.128A} and \texttt{TESS\_PRF} \citep{2022ascl.soft07008B}.
+> This publication made use of \texttt{TESS-cont} (\url{https://github.com/castro-gzlz/TESS-cont}), which also used \texttt{tpfplotter} \citep{2020A&A...635A.128A} and \texttt{TESS\_PRF} \citep{2022ascl.soft07008B}.
