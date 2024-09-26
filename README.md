@@ -87,3 +87,13 @@ Examples 1 and 2 represent the main operation of *TESS-cont*. However, the packa
 | tic | Any | TIC ID of the target star |
 
 
+#### [OPTIONAL] | Optional parameters
+
+| Parameter  | Possible values | Description |
+| ------------- | ------------- | ------------- |
+| sector | Any number| TESS sector to be analysed |
+| n_sources | Any number | Number of contaminant sources to study (the most contaminant will be selected) |
+| tic | Any | TIC ID of the target star |
+
+
+
