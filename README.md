@@ -96,11 +96,12 @@ Examples 1 and 2 represent the main operation of *TESS-cont*. However, the packa
 | gaia_catalog | DR2 or DR3 | Gaia catalog. Default: DR3 |
 | target_name | Any name | Target name. Default: Target |
 | plot_target_name | True or False | Specify the target name in the plots. Default: False|
+| loc_legend | best, upper left, center, etc | Location of the legend (heatmap plot). Default: best |
 | img_fmt | png or pdf | Format of output images. Default: pdf |
 
+#### [DILUTION] | Arguments for the **DILUTION** analysis
 
-
-
-
-
+| td | Any number| Measured transit depth in the target star |
+| dilution_corr | True or False | The introduced depth is corrected for dilution (e.g. TESS-SPOC products) or not. Default: True  |
+| td_unit | ppm, ppt, per, frac | Unit of the introduced transit depth |
 
