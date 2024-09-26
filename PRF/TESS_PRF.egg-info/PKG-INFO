@@ -1,0 +1,56 @@
+Metadata-Version: 2.1
+Name: TESS-PRF
+Version: 0.0.4
+Summary: Tools to display the TESS pixel response function (PRF) at any location on the detector
+Home-page: https://github.com/keatonb/TESS_PRF
+Author: Keaton Bell
+Author-email: keatonbell@utexas.edu
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/keatonb/TESS_PRF/issues
+Description: # TESS_PRF
+        Tools to display the TESS pixel response function (PRF) at any location on the detector.
+        
+        By default, will access the relevant [PRF files on MAST](https://heasarc.gsfc.nasa.gov/docs/tess/observing-technical.html#point-spread-function) (internet required), but you can also download these files and reference their local directory.  There is also an option to generate a 2D Gaussian PRF, however appropriate that may be.
+        
+        This is primarily for understanding how the light from a point source might be distributed given its position in a TESS Target Pixel File (TPF) or [TESScut](https://mast.stsci.edu/tesscut/) postage stamp. Referencing the real TESS PRF models, you'll need to provide the Camera, CCD, and Sector numbers, along with the column and row numbers at approximately the center of your TPF to interpolate a PRF appropriate for that postage stamp.  This package assumes the PRF doesn't change considerably within a small TPF.  You can then position the PRF model by passing the relative row and column location within the TPF to the "resample" method.
+        
+        ```python
+        from TESS_PRF import PRF
+        import matplotlib.pyplot as plt
+        
+        # Suppose the following for a TPF of interest
+        cam = 3
+        ccd = 4
+        sector = 13
+        colnum = 113 #middle of TPF
+        rownum = 298 #middle of TPF
+        
+        prf = PRF.TESS_PRF(cam,ccd,sector,colnum,rownum)
+        
+        # See what this looks like in the center of an 11x11 TPF
+        resampled = prf.resample(5.5, 5.5, (11,11))
+        
+        plt.imshow(resampled)
+        plt.show()
+        ```
+        With this result:
+        ![PRF example](https://github.com/keatonb/TESS_PRF/raw/main/example.png)
+        
+        To generate a Gaussian PRF to reposition with a TPF, call `PRF.Gaussian_PRF(sigma)` where `sigma` is in units of TESS pixels.
+        
+        ### Installation
+        TESS_PRF is pip installable with the command `pip install TESS_PRF`
+        
+        Or clone this repository and run 
+        ```bash
+        cd TESS_PRF
+        python -m build
+        pip install -e .
+        ```
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
