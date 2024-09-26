@@ -72,7 +72,11 @@ This star was found to have a planet candidate, TOI-4479.01, with a transit dept
 Since those values (**2-28%**) are lower than the unphysical threshold of 100% (e.g. ), we cannot discard that they could be the origin of the transit signal found based on the TESS data alone. This example reveals the necessity of higher-spatial resolution observations (e.g. ground-based photometry or spectroscopy) to confidently discard those contaminant sources. 
 
 
-### Example 3: Custom apertures, SAP photometry correction, FFIs, and more. 
+### More examples: Custom apertures, SAP photometry correction, FFIs, and more. 
+
+Examples 1 and 2 represent the main operation of *TESS-cont*. However, the package is also able to **create custom apertures to minimize contamination** from nearby sources, **correct SAP photometry from crowding** (which is very useful for targets without PDCSAP) starting from the TPFs an/or FFIs, and more! 
+
+**During the next few days, I will be implementing more usage examples for these scenarios. Stay tuned and save the package if you find it useful for your research!**
 
 ## Configuration file
 
