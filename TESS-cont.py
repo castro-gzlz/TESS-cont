@@ -173,7 +173,7 @@ except:
 try:
     img_fmt = OPTIONAL['img_fmt']
 except:
-    img_fmt = 'png'
+    img_fmt = 'pdf'
     
 try:
     save_metrics = OPTIONAL['save_metrics'] == 'True'
