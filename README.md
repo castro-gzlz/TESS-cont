@@ -42,7 +42,7 @@ In this example, we specify the **TIC number** of TOI-5005 (282485660) to quanti
 python TESS-cont.py TOI-5005_S65.ini
 ```
 
-![example1](https://github.com/user-attachments/assets/4e413a10-2edf-4a18-91fa-97147b189504)
+![example1](https://github.com/user-attachments/assets/b9b156a5-2337-4df8-a7f3-7942f2328319)
 
 
 The left-hand plot is a **heatmap** indicating **the flux percentage from the target star** falling within each pixel. As we can see, inside the aperture, TOI-5005 contributes between **60%** and **90%** of the total flux, depending on the considered pixel. The disk sizes are scaled to the emitted fluxes. 
