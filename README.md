@@ -80,4 +80,10 @@ Examples 1 and 2 represent the main operation of *TESS-cont*. However, the packa
 
 ## Configuration file
 
+#### [MANDATORY] | Mandatory parameters
+
+| Parameter  | Possible values | Description |
+| ------------- | ------------- | ------------- |
+| tic | Any | TIC ID of the target star |
+
 
