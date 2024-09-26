@@ -45,7 +45,7 @@ python TESS-cont.py TOI-5005_S65.ini
 ![example1](https://github.com/user-attachments/assets/4e413a10-2edf-4a18-91fa-97147b189504)
 
 
-The left-hand plot is a **heatmap** indicating **the flux percentage from the target star** falling within each pixel. As we can see, inside the aperture, TOI-5005 contributes between **60%** and **90%** of the total flux, depending on the considered pixel. The disk sizes are scaled to the emitted fluxes. 
+The left-hand plot is a **heatmap** indicating **the flux percentage coming from the target star** falling within each pixel. As we can see, inside the aperture, TOI-5005 contributes between **60%** and **90%** of the total flux, depending on the considered pixel. The disk sizes are scaled to the emitted fluxes. 
 
 The right-hand plot is a **pie chart** representing the flux from the target and nearby stars **falling inside the photometric aperture**. Overall, **TOI-5005 contributes 84.4%** to the measured photometry, while **the remaining 15.6% comes from different nearby sources**. Interestingly, the second most contaminant star (**Star#2**) is a very bright source located **outside the TESS Target Pixel File (TPF)**. This example shows the **usefulness of *TESS-cont* to identify not evident contaminant sources that could be otherwise overlooked**. 
 
