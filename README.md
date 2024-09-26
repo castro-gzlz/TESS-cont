@@ -92,8 +92,15 @@ Examples 1 and 2 represent the main operation of *TESS-cont*. However, the packa
 | Parameter  | Possible values | Description |
 | ------------- | ------------- | ------------- |
 | sector | Any number| TESS sector to be analysed |
-| n_sources | Any number | Number of contaminant sources to study (the most contaminant will be selected) |
-| tic | Any | TIC ID of the target star |
+| n_sources | Any number | Number of contaminant sources to study individually |
+| gaia_catalog | DR2 or DR3 | Gaia catalog. Default: DR3 |
+| target_name | Any name | Target name |
+| plot_target_name | True or False | Specify the target name in the plots. Default: False|
+| img_fmt | png or pdf | Format of output images. Default: pdf |
+
+
+
+
 
 
 
