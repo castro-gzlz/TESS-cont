@@ -109,3 +109,7 @@ Since those values (**2-28%**) are lower than the unphysical threshold of 100% (
 | dilution_corr | True or False | The introduced depth is corrected for dilution (e.g. TESS-SPOC products) or not. Default: True  |
 | td_unit | ppm, ppt, per, frac | Unit of the introduced transit depth |
 
+## Credits
+
+> This publication made use of \texttt{TESS-cont} (\url{https://github.com/castro-gzlz/TESS-cont}), which also made use of \texttt{tpfplotter} \citep{2020A&A...635A.128A} and \texttt{TESS\_PRF} \citep{2022ascl.soft07008B}.
+
