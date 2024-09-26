@@ -101,6 +101,8 @@ Examples 1 and 2 represent the main operation of *TESS-cont*. However, the packa
 
 #### [DILUTION] | Arguments for the **DILUTION** analysis
 
+| Parameter  | Possible values | Description |
+| ------------- | ------------- | ------------- |
 | td | Any number| Measured transit depth in the target star |
 | dilution_corr | True or False | The introduced depth is corrected for dilution (e.g. TESS-SPOC products) or not. Default: True  |
 | td_unit | ppm, ppt, per, frac | Unit of the introduced transit depth |
