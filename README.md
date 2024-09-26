@@ -80,6 +80,8 @@ Since those values (**2-28%**) are lower than the unphysical threshold of 100% (
 
 ## Configuration file
 
+**NOTE: Only the main set of parameters are currently described. The full list together with additional usage examples will come soon!**
+
 #### [MANDATORY] | Mandatory parameters
 
 | Parameter  | Possible values | Description |
