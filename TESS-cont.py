@@ -790,10 +790,6 @@ def get_hex_color_list(num_colors=5, saturation=0.4, value=1.0):
     return hex_colors
 
 
-# In[ ]:
-
-
-pie_ratios
 
 
 # In[ ]:
