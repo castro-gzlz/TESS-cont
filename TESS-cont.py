@@ -43,7 +43,7 @@ from astropy.visualization.mpl_normalize import ImageNormalize
 
 #@|Uncomment this line for the tess-cont.ipynb version
 #@|#####--Configuration file--#########
-config_file = 'TOI-5005_S65.ini'
+#config_file = 'TOI-5005_S65.ini'
 #@|####################################
 
 
@@ -111,7 +111,7 @@ except:
 #@|-------------------
 #@|MANDATORY argument
 #@|-------------------
-tic = MANDATORY['tic']
+target = MANDATORY['target']
 
 
 # In[ ]:
@@ -282,12 +282,6 @@ except:
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
 #@|############################
 #@|we create the output folder
 #@|############################
@@ -310,35 +304,36 @@ except:
 #@|the aperture mask of the SPOC pipeline (in case it has one): tpf.pipeline_mask.
 #@|the shape of the tpf in order to create the PRF with the same dimensions: tpf.shape[1:3].
 
-#@|download the target pixel file (TPF)
+#@|++++++++++++++++++++++++++++++++++++
+#@|download the Target Pixel File (TPF)
+#@|++++++++++++++++++++++++++++++++++++
 if tpf_or_tesscut == 'tpf':
     try:
-        search_result = lk.search_targetpixelfile('TIC '+str(tic), sector = int(sector))
+        #search_result = lk.search_targetpixelfile('TIC '+str(tic), sector = int(sector))
+        search_result = lk.search_targetpixelfile(str(target), sector = int(sector))
     except NameError: search_result = lk.search_targetpixelfile('TIC '+str(tic))
     tpf = search_result.download()
+    tic = tpf.targetid
     if len(search_result) == 0:
         try:
             print(f'Error: There is not a target pixel file for TIC {tic} (sector {sector}).            You can try with a tesscut on the FFIs!')
         except NameError: print(f'Error: There is not a target pixel file for TIC {tic}.            You can try with a tesscut on the FFIs!')
         sys.exit()
 
-#@|download a tesscut on the TESS full-frame images (FFIs)        
+#@|+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#@|download a tesscut on the TESS full-frame images (FFIs)
+#@|+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 if tpf_or_tesscut == 'tesscut':
     try:
         search_result = lk.search_tesscut('TIC '+str(tic), sector = int(sector))
     except NameError: lk.search_tesscut('TIC '+str(tic))
     tpf = search_result.download(cutout_size = cutout_size)
+    tic = tpf.targetid
     if len(search_result) == 0:
         try:
             print(f'Error: An error has occoured downloading the tesscut of TIC {tic} (sector {sector}).')
         except NameError: print(f'Error: An error has occoured downloading the tesscut of TIC {tic}.')
         sys.exit()
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -385,6 +380,12 @@ def get_gaia_data(ra, dec, search_radius=250):
 # In[ ]:
 
 
+
+
+
+# In[ ]:
+
+
 #@|---------------------------------------------------------------------
 #@|we build an astroy table with all the Gaia sources within a radius R.
 #@|---------------------------------------------------------------------
@@ -392,12 +393,6 @@ print(f'Searching for nearby Gaia {gaia_catalog} stars ...')
 table = get_gaia_data(tpf.ra, tpf.dec, search_radius = search_radius)
 table = table[~table['Gmag'].value.mask]  #@|we discard those targets with a 'nan' G magnitude
 print(f'There are {len(table)} stars surrounding {target_name} within a radius of {search_radius} arcsec')
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -466,6 +461,12 @@ for i in tqdm(range(len(table))):
     
     coords.append(coords_ac)
     pixel_coords.append(pixel_coords_ac)
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
@@ -581,11 +582,9 @@ CROWDSAP_pixel_by_pixel = resampled_list[idx_target] / resampled
 if aperture == 'pipeline':
     aperture_mask = tpf.pipeline_mask
     if len(np.where(aperture_mask==True)[0]) == 0:
-        try:
-            aperture_mask = lk.search_targetpixelfile('TIC '+str(tic), sector = int(sector)).download().pipeline_mask
-        except:
-            raise Exception(f'The target TIC {tic} does not have a pipeline aperture in sector {sector}. Please modify your config.ini file so that **aperture: threshold_target_flux** or **aperture: threshold_median_flux** in order to create your own aperture (see the documentaion for details on each aperture creation method).')
-
+        print(f'The target TIC {tic} does not have a pipeline aperture in sector {sector}. Please modify your config.ini file so that **aperture: threshold_target_flux** or **aperture: threshold_median_flux** in order to create your own aperture (see the documentaion for details on each aperture creation method).')
+        sys.exit()
+        
 if aperture == 'threshold_median_flux':
     aperture_mask = tpf.create_threshold_mask(threshold=threshold_median)
     
@@ -1023,6 +1022,12 @@ if img_fmt == 'png' or img_fmt == 'pdfpng':
     
 #print('')
 print('\033[1m' + f'Your heatmap {target_name}_S{sector}_heatmap.pdf/png has been successfully generated and saved'+'\033[0m')  
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
