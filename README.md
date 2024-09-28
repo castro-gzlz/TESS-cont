@@ -86,7 +86,7 @@ Since those values (**2-28%**) are lower than the unphysical threshold of 100%, 
 
 | Parameter  | Possible values | Description |
 | ------------- | ------------- | ------------- |
-| target | Any TIC/TOI ID, or star's name in Simbad | Target star identifier |
+| target | Any TIC/TOI or star's name resoluble in Simbad | Target star identifier |
 
 
 #### [OPTIONAL] | Optional parameters
