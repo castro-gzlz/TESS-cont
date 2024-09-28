@@ -57,7 +57,7 @@ We now study the star TOI-4479. As we can see, the field is **less crowded** (th
 python TESS-cont.py TOI-4479_S41.ini
 ```
 
-![example2](https://github.com/user-attachments/assets/956e41ce-de4a-4b64-9453-cb5ef57c8523)
+![example2](https://github.com/user-attachments/assets/0825cde1-80e0-464f-a105-ef4c4f9529d1)
 
 
 This star was found to have a planet candidate, TOI-4479.01, with a transit depth of 3471 ppm (parts per million) according to [ExoFOP](https://exofop.ipac.caltech.edu/tess/target.php?id=126606859), which was later confirmed to be a planet by [Esparza-Borges et al. (2022)](https://ui.adsabs.harvard.edu/abs/2022A%26A...666A..10E/abstract) with follow-up observations. We here use the *TESS-cont* **DILUTION** feature to know whether we can discard the nearby contaminant sources as being the origin of the signal found based on the TESS photometry alone. By introducing the measured transit depth, and selecting ```dilution_corr: True``` (since the TESS transit depths are already corrected for dilution), we find that the observed transit signal could have originated in the six most contaminant stars with the following transit depths: 
