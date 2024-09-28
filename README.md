@@ -121,3 +121,38 @@ TBC
 and add the following sentence within the acknowledgements section:
 
 > This publication made use of \texttt{TESS-cont} (\url{https://github.com/castro-gzlz/TESS-cont}), which also used \texttt{tpfplotter} \citep{2020A&A...635A.128A} and \texttt{TESS\_PRF} \citep{2022ascl.soft07008B}.
+
+@ARTICLE{2020A&A...635A.128A,
+       author = {{Aller}, A. and {Lillo-Box}, J. and {Jones}, D. and {Miranda}, L.~F. and {Barcel{\'o} Forteza}, S.},
+        title = "{Planetary nebulae seen with TESS: Discovery of new binary central star candidates from Cycle 1}",
+      journal = {\aap},
+     keywords = {planetary nebulae: general, techniques: photometric, binaries: general, Astrophysics - Solar and Stellar Astrophysics},
+         year = 2020,
+        month = mar,
+       volume = {635},
+          eid = {A128},
+        pages = {A128},
+          doi = {10.1051/0004-6361/201937118},
+archivePrefix = {arXiv},
+       eprint = {1911.09991},
+ primaryClass = {astro-ph.SR},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2020A&A...635A.128A},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@software{2022ascl.soft07008B,
+       author = {{Bell}, Keaton J. and {Higgins}, Michael E.},
+        title = "{TESS\_PRF: Display the TESS pixel response function}",
+ howpublished = {Astrophysics Source Code Library, record ascl:2207.008},
+         year = 2022,
+        month = jul,
+          eid = {ascl:2207.008},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2022ascl.soft07008B},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+
+
+
+
+
