@@ -131,7 +131,7 @@ except:
 try:
     target_name = OPTIONAL['target_name']
 except:
-    target_name = 'TIC_'+str(tic)
+    target_name = str(target)
     
 #@|search radius for Gaia DR3 targets
 try:
