@@ -30,6 +30,7 @@ from colorsys import hsv_to_rgb
 from astroquery.mast import Catalogs
 from configparser import ConfigParser
 import matplotlib.gridspec as gridspec
+from matplotlib.colorbar import Colorbar
 import astropy.visualization as stretching
 from matplotlib.patches import ConnectionPatch
 from astropy.coordinates import SkyCoord, Angle
@@ -43,7 +44,7 @@ from astropy.visualization.mpl_normalize import ImageNormalize
 
 #@|Uncomment this line for the tess-cont.ipynb version
 #@|#####--Configuration file--#########
-#config_file = 'TOI-5005_S65.ini'
+config_file = 'TOI-5005_S65.ini'
 #@|####################################
 
 
@@ -173,7 +174,7 @@ except:
 try:
     img_fmt = OPTIONAL['img_fmt']
 except:
-    img_fmt = 'pdf'
+    img_fmt = 'pdfpng'
     
 try:
     save_metrics = OPTIONAL['save_metrics'] == 'True'
@@ -755,7 +756,7 @@ gaia_names_selected = []
 pixel_coords_selected = []
 for i,index in enumerate(idxs_selected_contaminant_sources):
     
-    bar_labels.append(f'Star#{i+1}')      #@|this is the good one
+    bar_labels.append(f'Star {i+1}')      #@|this is the good one
     #@|gaia names
     gaia_names_selected.append(table['Source'][index])
     #@|coordinates
@@ -792,14 +793,14 @@ def get_hex_color_list(num_colors=5, saturation=0.4, value=1.0):
 # In[ ]:
 
 
-
+pie_ratios
 
 
 # In[ ]:
 
 
 #@|################
-#@|Fancy pie plot
+#@|+++Pie chart++++
 #@|################
 
 print(f'Generating the pie chart plot of {target_name} (Sector {sector}) ...')
@@ -807,26 +808,23 @@ print(f'Generating the pie chart plot of {target_name} (Sector {sector}) ...')
 # make figure and assign axis objects
 #fig, (ax1, ax2) = plt.subplots(1, 2,  width_ratios=[3, 1], figsize=(9, 5))
 fig, (ax1, ax2) = plt.subplots(1, 2, gridspec_kw={'width_ratios': [1,6]}, figsize=(6.93, 5.5))
-#fig.subplots_adjust(wspace=0) #old
-fig.subplots_adjust(top = 1.55, bottom = 0, right = 1, left = 0, 
+fig.subplots_adjust(top = 1.50, bottom = 0, right = 1, left = 0, 
         hspace = 0, wspace = 0)
+
 
 #@|------PIE CHART-----#@|
 
 # pie chart parameters
 pie_ratios = [1-CROWDSAP, CROWDSAP]
-if plot_target_name:
-    pie_labels = ['Nearby', target_name]
-else:
-    pie_labels = ['Nearby', 'Target']
-    
+#pie_labels = ['Nearby', 'Target']     
+pie_labels = ['', '              ']  #this
 pie_colors = ['lightgrey','#25BDB0']
 explode = [0.5, 0]
 # rotate so that first wedge is split by the x-axis
 angle = -180 * pie_ratios[0]
-wedges, *_ = ax1.pie(pie_ratios, autopct='%1.1f%%', textprops = {'size': '19'}, startangle=angle,
-                     labels=pie_labels, explode=explode, colors = pie_colors, radius = 6)
-
+#wedges, *_ = ax1.pie(pie_ratios, autopct='%1.1f%%', textprops = {'size': '21'}, startangle=angle,
+                     #labels=pie_labels, explode=explode, colors = pie_colors, radius = 6)
+wedges, *_ = ax1.pie(pie_ratios, startangle=angle, explode=explode,                      colors = pie_colors, radius = 6, labels = pie_labels)
 
 #@|------BAR CHART-----#@|
 
@@ -856,6 +854,7 @@ ax2.legend(bbox_to_anchor=(0.420,1.422), loc="upper left",  bbox_transform=fig.t
 ax2.axis('off')
 #ax2.set_xlim(- 2.5 * width, 2.5 * width)
 ax2.set_xlim(- 1 , 0.3)
+ax2.set_ylim(-0.05, 1.04)
 
 # use ConnectionPatch to draw lines between the two plots
 theta1, theta2 = wedges[0].theta1, wedges[0].theta2
@@ -880,14 +879,18 @@ con.set_color('k')
 ax2.add_artist(con)
 con.set_linewidth(2)
 
+
+ax1.text(-5.1, -0.2, f'Target ({"{:1.1f}".format(pie_ratios[1]*100)}%)', fontsize = 17)
+ax1.text(1.45, -0.2, f'Nearby ({"{:1.1f}".format(pie_ratios[0]*100)}%)', fontsize = 17)
+
 #|----------------------------
 #@|save the fancy pie chart#@|
 #|----------------------------
 
 if img_fmt == 'pdf' or img_fmt == 'pdfpng':
-    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_piechart.pdf', bbox_inches = 'tight', pad_inches = 0.35)
+    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_piechart.pdf',                bbox_inches = 'tight', pad_inches = 0)
 if img_fmt == 'png'or img_fmt == 'pdfpng':
-    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_piechart.png', bbox_inches = 'tight', pad_inches = 0.35, dpi = 400)
+    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_piechart.png',                bbox_inches = 'tight', dpi = 400, pad_inches = 0)
     
 #print('')
 print('\033[1m' + f'Your pie chart {target_name}_S{sector}_piechart.pdf/png has been successfully generated and saved'+'\033[0m')
@@ -902,6 +905,12 @@ print('\033[1m' + f'Your pie chart {target_name}_S{sector}_piechart.pdf/png has 
 # In[ ]:
 
 
+pie_ratios
+
+
+# In[ ]:
+
+
 print(f'Generating the heatmap plot of {target_name} (Sector {sector}) ...')
 fig = plt.figure(figsize=(6.93, 5.5))
 _, nx,ny = np.shape(tpf)
@@ -911,6 +920,7 @@ ax1 = plt.subplot(gs[0,0])
 maskcolor = 'red'
 
 norm = ImageNormalize(stretch=stretching.LogStretch(), vmin = 0.1, vmax = 99)
+#norm = ImageNormalize(vmin = 0.1, vmax = 99)
 #norm = ImageNormalize( vmin = -15, vmax = 115)
 
 splot = plt.imshow(CROWDSAP_pixel_by_pixel*100,                   zorder=0,alpha =1, 
@@ -945,10 +955,10 @@ if plot_percentages:
             
 
 #@|#####
-plt.xlabel('Pixel Column Number', fontsize=15, zorder=200)
-plt.ylabel('Pixel Row Number', fontsize=15, zorder=200)
-plt.xticks(fontsize=13)
-plt.yticks(fontsize=13)
+plt.xlabel('Pixel Column Number', fontsize=14, zorder=200)
+plt.ylabel('Pixel Row Number', fontsize=14, zorder=200)
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
 
 
 #@|##################################################@|
@@ -989,26 +999,27 @@ legend_marker_size = 60
 def updatescatter(handle, orig):
     handle.update_from(orig)
     handle.set_sizes([legend_marker_size])
-plt.legend(loc = loc_legend, handler_map={PathCollection : HandlerPathCollection(update_func=updatescatter)},           framealpha=0.9, fontsize = 12).set_zorder(10000)
+plt.legend(loc = loc_legend, handler_map={PathCollection : HandlerPathCollection(update_func=updatescatter)},           framealpha=0.8, fontsize = 12).set_zorder(10000)
 
-# Colorbar
-from matplotlib.colorbar import Colorbar
+#@|--------
+#@|COLORBAR
+#@|--------
 cbax = plt.subplot(gs[0,1]) # Place it where it should be.
 pos1 = cbax.get_position() # get the original position
-pos2 = [pos1.x0 - 0.05, pos1.y0 ,  pos1.width, pos1.height]
+pos2 = [pos1.x0 - 0.075, pos1.y0, pos1.width, pos1.height]
 cbax.set_position(pos2) # set a new position
 
-cbar_ticks = np.linspace(np.min(CROWDSAP_pixel_by_pixel), np.max(CROWDSAP_pixel_by_pixel), 10, endpoint=True)
+#cbar_ticks = np.array([10, 20, 40, 60, 80])
+#cb = Colorbar(ax = cbax, mappable = splot, orientation = 'vertical',
+              #ticklocation = 'right', ticks =  cbar_ticks)
 
 cb = Colorbar(ax = cbax, mappable = splot, orientation = 'vertical',
               ticklocation = 'right')
-#plt.xticks(fontsize=14)
-#cbax.set_yticklabels(["{:4.2f}".format(i) for i in cbar_ticks])
-#exponent = r'$\times 10^'+str(division)+'$'
+
 if plot_target_name:
-    cb.set_label(f'Flux ratio from {target_name} (%)', labelpad=10, fontsize=15)
+    cb.set_label(f'Flux ratio from {target_name} (%)', labelpad=10, fontsize=14)
 else:
-    cb.set_label('Flux ratio from the target star (%)', labelpad=10, fontsize=15)
+    cb.set_label('Flux ratio from the target star (%)', labelpad=10, fontsize=14)
 
 #@|---------------------------
 #@|----save the heatmap-----#@|
@@ -1016,12 +1027,18 @@ else:
 
 
 if img_fmt == 'pdf' or img_fmt == 'pdfpng':
-    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_heatmap.pdf', bbox_inches = 'tight')
+    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_heatmap.pdf',                 bbox_inches = 'tight', pad_inches = 0)
 if img_fmt == 'png' or img_fmt == 'pdfpng':
-    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_heatmap.png', bbox_inches = 'tight', dpi = 400)
+    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_heatmap.png',                 bbox_inches = 'tight', pad_inches = 0, dpi = 400)
     
 #print('')
 print('\033[1m' + f'Your heatmap {target_name}_S{sector}_heatmap.pdf/png has been successfully generated and saved'+'\033[0m')  
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
