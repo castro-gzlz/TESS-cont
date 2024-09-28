@@ -36,7 +36,7 @@ The file *my_config_file.ini* should contain all the necessary information to ma
 
 ### Example 1: The simplest case. A TIC number is all you need
 
-In this example, we specify the **TIC number** of TOI-5005 (TIC 282485660) to quantify the different flux contributions to its SPOC photometric aperture in **Sector 65**. 
+In this example, we specify the **TIC number** of TOI-5005 (TIC 282485660) to quantify the flux contributions to its SPOC photometric aperture in **Sector 65**. 
 
 ```
 python TESS-cont.py TOI-5005_S65.ini
