@@ -49,7 +49,7 @@ The left-hand plot is a **heatmap** indicating **the flux percentage from the ta
 
 The right-hand plot is a **pie chart** representing the flux from the target and nearby stars **falling inside the photometric aperture**. Overall, **TOI-5005 contributes 84.4%** to the measured photometry, while **the remaining 15.6% comes from different nearby sources**. Interestingly, the second most contaminant star (**Star#2**) is a very bright source located **outside the TESS Target Pixel File (TPF)**. This example shows the **usefulness of *TESS-cont* to identify not evident contaminant sources that could be otherwise overlooked**. 
 
-### Example 2: Can the nearby stars be the source of the (transit and variability) signals found?
+### Example 2: Possible origins of the transit (and variability) signals
 
 In this example, we study the star TOI-4479. As we can see, the field is **less crowded** (there are fewer white disks) but the SPOC photometry is **more contaminated**, with a total contaminant flux fraction of **30.4%** inside the aperture. 
 
