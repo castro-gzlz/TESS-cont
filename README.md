@@ -82,7 +82,7 @@ Since those values (**2-28%**) are lower than the unphysical threshold of 100%, 
 ## Configuration file
 
 
-#### [MANDATORY] | Mandatory parameters
+#### [MANDATORY] | Mandatory parameter
 
 | Parameter  | Possible values | Description |
 | ------------- | ------------- | ------------- |
