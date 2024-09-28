@@ -51,7 +51,7 @@ The right-hand plot is a **pie chart** representing the flux from the target and
 
 ### Example 2: Possible origins of the transit (and variability) signals
 
-In this example, we study the star TOI-4479. As we can see, the field is **less crowded** (there are fewer white disks) but the SPOC photometry is **more contaminated**, with a total contaminant flux fraction of **30.4%** inside the aperture. 
+We now study the star TOI-4479. As we can see, the field is **less crowded** (there are fewer white disks) but the SPOC photometry is **more contaminated**, with a total contaminant flux fraction of **30.4%** inside the aperture. 
 
 ```
 python TESS-cont.py TOI-4479_S41.ini
