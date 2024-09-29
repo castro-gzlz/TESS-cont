@@ -44,7 +44,7 @@ from astropy.visualization.mpl_normalize import ImageNormalize
 
 #@|Uncomment this line for the tess-cont.ipynb version
 #@|#####--Configuration file--#########
-config_file = 'TOI-5005_S65.ini'
+#config_file = 'TOI-5005_S65.ini'
 #@|####################################
 
 
@@ -63,12 +63,6 @@ print("@|---------------------@|")
 print("        TESS-cont       ")
 print("@|---------------------@|")
 print("")
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -326,8 +320,8 @@ if tpf_or_tesscut == 'tpf':
 #@|+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 if tpf_or_tesscut == 'tesscut':
     try:
-        search_result = lk.search_tesscut('TIC '+str(tic), sector = int(sector))
-    except NameError: lk.search_tesscut('TIC '+str(tic))
+        search_result = lk.search_tesscut(str(target), sector = int(sector))
+    except NameError: lk.search_tesscut(str(target))
     tpf = search_result.download(cutout_size = cutout_size)
     tic = tpf.targetid
     if len(search_result) == 0:
@@ -335,12 +329,6 @@ if tpf_or_tesscut == 'tesscut':
             print(f'Error: An error has occoured downloading the tesscut of TIC {tic} (sector {sector}).')
         except NameError: print(f'Error: An error has occoured downloading the tesscut of TIC {tic}.')
         sys.exit()
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -376,12 +364,6 @@ def get_gaia_data(ra, dec, search_radius=250):
         raise too_few_found_message
         
     return result 
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -424,7 +406,10 @@ def get_dr2_id_from_tic(tic):
 #@|---------------------------------------------------------------------
 #@|we obtain which index in 'table' corresponds to our target (idx_target)
 #@|---------------------------------------------------------------------
-gaia_dr3_target = get_dr2_id_from_tic(str(tic))
+if tpf_or_tesscut == 'tesscut':
+    gaia_dr3_target = get_dr2_id_from_tic(str(tic[4:]))
+if tpf_or_tesscut == 'tpf':
+    gaia_dr3_target = get_dr2_id_from_tic(str(tic))
 idx_target = np.where(table['Source'] == gaia_dr3_target)[0][0]
 #print(idx_target)
 
@@ -455,25 +440,23 @@ table['flux'] = flux_col
 print(f'Extracting the Gaia {gaia_catalog} coordinates of the nearby targets and converting them into pixel coordinates ... ')
 coords = []
 pixel_coords = []
+
+#@|proper motion correction 
+
+if gaia_catalog == 'DR3':
+    t_reference =  2457389            # 2016-01-01 12:00:00.000 | Lindegren et al. (2021)
+if gaia_catalog == 'DR2':
+    t_reference = 2457389 - 182.625   # 2015-07-02 21:00:00.000 | Lindegren et al. (2021)
+    
+t_inc = (tpf.time[0].jd - t_reference) / 365  #year
+
 for i in tqdm(range(len(table))):
     
-    coords_ac = SkyCoord(table[i]['RA_ICRS'], table[i]['DE_ICRS'], unit="deg")  # defaults to ICRS frame
-    pixel_coords_ac = wcs.utils.skycoord_to_pixel(coords_ac, tpf.wcs, origin=0, mode='all')
-    
+    #coords_ac = SkyCoord(table[i]['RA_ICRS'], table[i]['DE_ICRS'], unit="deg") # OLD --- no pm correction ---
+    coords_ac = SkyCoord(table[i]['RA_ICRS']+np.nan_to_num(table['pmRA'].value.data[i]) / 3600000 * t_inc,                         table[i]['DE_ICRS']+np.nan_to_num(table['pmDE'].value.data[i]) / 3600000 * t_inc,                         unit="deg")  # defaults to ICRS frame | includes pm correction
+    pixel_coords_ac = wcs.utils.skycoord_to_pixel(coords_ac, tpf.wcs, origin = 0, mode='all')
     coords.append(coords_ac)
     pixel_coords.append(pixel_coords_ac)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -496,7 +479,7 @@ sector = tpf.sector
 if method_prf == 'approximate':
     #@|In the approximate method, we estimate the prf in the middle of the TPF ONLY ONCE, and use
     #@|the obtained distribution for all targets (assuming that its shape won't change much)
-    prf = PRF.TESS_PRF(cam,ccd,sector,tpf.column+tpf.shape[1]/2, tpf.row+tpf.shape[2]/2)
+    prf = PRF.TESS_PRF(cam,ccd,sector,tpf.column+tpf.shape[2]/2, tpf.row+tpf.shape[1]/2)
     print('PRF built in the middle of the TPF (approximate method)')
     
     #@|we locate the computed PRF in each star's location
@@ -544,7 +527,7 @@ if method_prf == 'accurate':
 
         #@|we resample the PRF into the shape of the original tpf
         try:
-            resampled_ac = prf_array[idx].locate(pixel_coords[i][0], pixel_coords[i][1], table['flux'][i], tpf.shape[1:3])
+            resampled_ac = prf_array[idx].locate(pixel_coords[i][0], pixel_coords[i][1],                                                  table['flux'][i], tpf.shape[1:3])
         except:
             #@|this exception occours when there are Gaia sources too far away 
             resampled_ac = np.zeros(tpf.shape[1:3]) 
@@ -556,21 +539,9 @@ if method_prf == 'accurate':
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
 #@|-----------------CROWDSAP pixel by pixel--------------------#@|
 CROWDSAP_pixel_by_pixel = resampled_list[idx_target] / resampled
 #@|------------------------------------------------------------#@|
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -600,12 +571,6 @@ if save_aper:
         pd.DataFrame(aperture_mask).to_csv(f'output/{target_name}/{target_name}_S{sector}_aperture_{aperture}_{threshold_median}.csv',                                        index = False)   
         
     #@|open as (e.g) aperture_mask = np.array(pd.read_csv('TIC_282485660_S12_aperture_threshold_median_flux_3.csv'))
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -677,12 +642,6 @@ CROWDSAP_arr = np.array(CROWDSAP_list)
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
 #@|we select the targets that contaminate the aperture ('idxs_contam')
 #@|that is, 'idxs_contam' contains all the indexes except that of the target star
 idxs_contam = np.where(CROWDSAP_arr!=CROWDSAP)[0] 
@@ -701,12 +660,6 @@ relative_contam = CROWDSAP_arr[idxs_contam] / np.sum(CROWDSAP_arr[idxs_contam])
 #@|we sort the contaminant sources, from more to less contaminant
 relative_contam_sorted = sorted(relative_contam, reverse = True)
 #contaminant_sorted
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -768,12 +721,6 @@ bar_labels.append('Other')
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
 #@|This is to generate fancy color palettes
 #@|from https://stackoverflow.com/questions/876853/generating-color-ranges-in-python
 #from colorsys import hsv_to_rgb  (moved up)
@@ -790,8 +737,6 @@ def get_hex_color_list(num_colors=5, saturation=0.4, value=1.0):
     return hex_colors
 
 
-
-
 # In[ ]:
 
 
@@ -804,7 +749,7 @@ print(f'Generating the pie chart plot of {target_name} (Sector {sector}) ...')
 # make figure and assign axis objects
 #fig, (ax1, ax2) = plt.subplots(1, 2,  width_ratios=[3, 1], figsize=(9, 5))
 fig, (ax1, ax2) = plt.subplots(1, 2, gridspec_kw={'width_ratios': [1,6]}, figsize=(6.93, 5.5))
-fig.subplots_adjust(top = 1.50, bottom = 0, right = 1, left = 0, 
+fig.subplots_adjust(top = 1.41, bottom = 0, right = 1, left = 0, 
         hspace = 0, wspace = 0)
 
 
@@ -813,7 +758,7 @@ fig.subplots_adjust(top = 1.50, bottom = 0, right = 1, left = 0,
 # pie chart parameters
 pie_ratios = [1-CROWDSAP, CROWDSAP]
 #pie_labels = ['Nearby', 'Target']     
-pie_labels = ['', '              ']  #this
+pie_labels = ['', '           ']  #this
 pie_colors = ['lightgrey','#25BDB0']
 explode = [0.5, 0]
 # rotate so that first wedge is split by the x-axis
@@ -821,6 +766,28 @@ angle = -180 * pie_ratios[0]
 #wedges, *_ = ax1.pie(pie_ratios, autopct='%1.1f%%', textprops = {'size': '21'}, startangle=angle,
                      #labels=pie_labels, explode=explode, colors = pie_colors, radius = 6)
 wedges, *_ = ax1.pie(pie_ratios, startangle=angle, explode=explode,                      colors = pie_colors, radius = 6, labels = pie_labels)
+
+#@|-----------------------Pie chart percentages inside the pie------------------------
+#@|+++Nearby stars+++
+if pie_ratios[0] >= 0.9995:
+    ax1.text(1.60, -0.2, f'Nearby ({"{:1.2f}".format(pie_ratios[0]*100)}%)', fontsize = 17)
+if 0.000995 < pie_ratios[0] < 0.0995:
+    ax1.text(1.20, -0.2, f'Nearby ({"{:1.1f}".format(pie_ratios[0]*100)}%)', fontsize = 17)
+if pie_ratios[0] < 0.000995:
+    ax1.text(0.80, -0.2, f'Nearby ({"{:1.2f}".format(pie_ratios[0]*100)}%)', fontsize = 17)    
+if 0.0995 < pie_ratios[0] < 0.9995:
+    ax1.text(1.45, -0.2, f'Nearby ({"{:1.1f}".format(pie_ratios[0]*100)}%)', fontsize = 17)
+#@|+++Target star+++
+if pie_ratios[1] >= 0.9995:
+    ax1.text(-5.2, -0.2, f'Target ({"{:1.2f}".format(pie_ratios[1]*100)}%)', fontsize = 17)
+if 0.000995 < pie_ratios[1] < 0.0995:
+    ax1.text(-4.9, -0.2, f'Target ({"{:1.1f}".format(pie_ratios[1]*100)}%)', fontsize = 17)
+if pie_ratios[1] < 0.000995:
+    ax1.text(-5.125, -0.2, f'Target ({"{:1.2f}".format(pie_ratios[1]*100)}%)', fontsize = 17)    
+if 0.0995 < pie_ratios[1] < 0.9995:
+    ax1.text(-5.125, -0.2, f'Target ({"{:1.1f}".format(pie_ratios[1]*100)}%)', fontsize = 17)
+#@|------------------------------------------------------------------------------------
+
 
 #@|------BAR CHART-----#@|
 
@@ -845,12 +812,12 @@ labels_ordered.reverse() #most contaminant sources first
 idx_other = np.where(np.array(labels_ordered) == 'Other')[0][0] #idxs of 'Other' to skip the color code in the next plot
 
 #ax1.set_title('Contaminant flux', fontsize = 14)
-ax2.legend(bbox_to_anchor=(0.462,0.865), loc="upper left",  bbox_transform=fig.transFigure, fontsize = 15)
-ax2.legend(bbox_to_anchor=(0.420,1.422), loc="upper left",  bbox_transform=fig.transFigure, fontsize = 18)
+#ax2.legend(bbox_to_anchor=(0.462,0.865), loc="upper left",  bbox_transform=fig.transFigure, fontsize = 15)
+ax2.legend(bbox_to_anchor=(0.420,1.422), loc="upper left",            bbox_transform=fig.transFigure, fontsize = 18, framealpha=0.8)
 ax2.axis('off')
 #ax2.set_xlim(- 2.5 * width, 2.5 * width)
 ax2.set_xlim(- 1 , 0.3)
-ax2.set_ylim(-0.05, 1.04)
+ax2.set_ylim(-0.05, 1.0)
 
 # use ConnectionPatch to draw lines between the two plots
 theta1, theta2 = wedges[0].theta1, wedges[0].theta2
@@ -876,12 +843,9 @@ ax2.add_artist(con)
 con.set_linewidth(2)
 
 
-ax1.text(-5.1, -0.2, f'Target ({"{:1.1f}".format(pie_ratios[1]*100)}%)', fontsize = 17)
-ax1.text(1.45, -0.2, f'Nearby ({"{:1.1f}".format(pie_ratios[0]*100)}%)', fontsize = 17)
-
-#|----------------------------
-#@|save the fancy pie chart#@|
-#|----------------------------
+#|----------------------
+#@|save the pie chart#@|
+#|----------------------
 
 if img_fmt == 'pdf' or img_fmt == 'pdfpng':
     plt.savefig(f'output/{target_name}/{target_name}_S{sector}_piechart.pdf',                bbox_inches = 'tight', pad_inches = 0)
@@ -895,27 +859,16 @@ print('\033[1m' + f'Your pie chart {target_name}_S{sector}_piechart.pdf/png has 
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
-pie_ratios
-
-
-# In[ ]:
-
-
 print(f'Generating the heatmap plot of {target_name} (Sector {sector}) ...')
 fig = plt.figure(figsize=(6.93, 5.5))
-_, nx,ny = np.shape(tpf)
+_, ny, nx = np.shape(tpf)
 gs = gridspec.GridSpec(1,3, height_ratios=[1], width_ratios=[1,0.05,0.01])
 gs.update(left=0.05, right=0.95, bottom=0.12, top=0.95, wspace=0.01, hspace=0.03)
 ax1 = plt.subplot(gs[0,0])
 maskcolor = 'red'
 
 norm = ImageNormalize(stretch=stretching.LogStretch(), vmin = 0.1, vmax = 99)
+norm = ImageNormalize(vmin = 0.1, vmax = 99)
 #norm = ImageNormalize(vmin = 0.1, vmax = 99)
 #norm = ImageNormalize( vmin = -15, vmax = 115)
 
@@ -937,8 +890,8 @@ if plot_percentages:
     for i in range(tpf.shape[1]):
         for j in range(tpf.shape[2]):
             
-            #if np.round(CROWDSAP_pixel_by_pixel[i, j] * 100, 1) == 0.0:
-                #continue
+            if np.round(CROWDSAP_pixel_by_pixel[i, j] * 100, 1) == 0.0:
+                continue
 
             #@|trick to avoid 100.0 values (put instead 100)
             if np.round(CROWDSAP_pixel_by_pixel[i, j] * 100, 1) == 100.0:
@@ -946,6 +899,9 @@ if plot_percentages:
                            ha="center", va="center", color="k", zorder = 1000, fontsize = 10.5) 
 
             else: 
+                #text = ax1.text(j+tpf.column, i+tpf.row, np.round(CROWDSAP_pixel_by_pixel[i, j] * 100, 1),
+                               #ha="center", va="center", color="k", zorder = 1000, fontsize = 10.5)
+                
                 text = ax1.text(j+tpf.column, i+tpf.row, np.round(CROWDSAP_pixel_by_pixel[i, j] * 100, 1),
                                ha="center", va="center", color="k", zorder = 1000, fontsize = 10.5)
             
@@ -977,7 +933,7 @@ if plot_main_contaminants:
     heat_colors.pop(idx_other)
     #for i,index in enumerate(idxs_selected_contaminant_sources):
     for i,index in reversed(list(enumerate(idxs_selected_contaminant_sources))):
-        plt.scatter(pixel_coords_selected[i][0]+tpf.column, pixel_coords_selected[i][1]+tpf.row,                    s = (scale_factor*table['flux'][index]), c = heat_colors[i], alpha = 0.8, ec = 'k',                    zorder = 100, label = bar_labels[i])      
+        plt.scatter(pixel_coords_selected[i][0]+tpf.column, pixel_coords_selected[i][1]+tpf.row,                    s = (scale_factor*table['flux'][index]), c = heat_colors[i], alpha = 0.8, ec = 'k',                    zorder = 100000, label = bar_labels[i])      
 
 #@|all the remaining Gaia DR3 sources
 if plot_all_gaia:
@@ -986,6 +942,7 @@ if plot_all_gaia:
         
     
 plt.ylim(tpf.row+ny-0.5, tpf.row-0.5)
+#plt.ylim(tpf.row+ny-0.5-1, tpf.row-0.5)       #Arrange for the 13x11 TPF, larger than the PRF arrays
 plt.xlim(tpf.column-0.5, tpf.column+nx-0.5)
 
 
@@ -1029,12 +986,6 @@ if img_fmt == 'png' or img_fmt == 'pdfpng':
     
 #print('')
 print('\033[1m' + f'Your heatmap {target_name}_S{sector}_heatmap.pdf/png has been successfully generated and saved'+'\033[0m')  
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
