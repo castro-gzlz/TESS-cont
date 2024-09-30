@@ -28,7 +28,7 @@ In the [Configuration file](#configuration-file) section we describe **all the p
 
 #### Python through Jupyter Notebook
 
-*TESS-cont* can also be used via Jupyter Notebook (TESS-cont.ipynb). Similarly to the terminal version, you just need to select a configuration file (config_file) and run all cells.
+*TESS-cont* can also be used via Jupyter Notebook ([TESS-cont.ipynb](https://github.com/castro-gzlz/TESS-cont/blob/main/TESS-cont.ipynb)). Similarly to the terminal version, you just need to select a configuration file and run all cells.
 
 ## Usage examples
 
