@@ -71,7 +71,13 @@ This star was found to have a planet candidate, TOI-4479.01, with a transit dept
 Since those values (**2-28%**) are lower than the unphysical threshold of 100%, we cannot discard that they could be the origin of the transit signal found based on the TESS data alone (e.g. [Castro-González et al. 2020](https://ui.adsabs.harvard.edu/abs/2020MNRAS.499.5416C/abstract); [de Leon et al. 2021](https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)). This example reveals the necessity of **higher-spatial resolution observations** (e.g. ground-based photometry or spectroscopy) to confidently **discard those contaminant sources**. 
 
 
-### Example 3: Approximate (fast) versus accurate (slower) operation
+### Example 3: Approximate (fast) versus accurate (slower) method
+
+By default, *TESS-cont* interpolates the PRFs to **all the pixels with *Gaia* sources** in the defined ```search_radius``` (Default: 200 arcsecs). This implies that the package builds one PRF per star, which **might take several minutes**. To **streamline this process**, we have implemented a **fast approximate method** that can be easily activated through ```method_prf: approximate``` within the [OPTIONAL] section. This method **interpolates the PRF only once** (in the middle of the TPF/FFI), before locating it in its corresponding position, assuming that its shape does not vary much across the nearby pixels. 
+
+This approximate method **typically provides very similar results** to the default ``method_prf: accurate``` method, so it and can be **useful to have a first hint** of the contamination level affecting your target (especially in higlhy crowded fields). However, **we always encourage to use the accurate method for final analyses or publications**. We haved coded *TESS-cont* so that the PRFs of stars in common pixels are only computed once, and hence **even in highly crowded fields the computational cost should not surpass ~5 minutes**. 
+
+## Other uses and precautions
 
 ## Configuration file
 
