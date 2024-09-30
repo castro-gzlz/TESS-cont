@@ -113,10 +113,24 @@ Since those values (**2-28%**) are lower than the unphysical threshold of 100%, 
 
 ## Credits
 
-If you use *mr-plotter*, please give credit to [this work](): 
+If you use *TESS-cont*, please give credit to [this work](): 
 
 ```
-TBC
+@ARTICLE{2024arXiv240918129C,
+       author = {{Castro-Gonz{\'a}lez}, A. and {Lillo-Box}, J. and {Armstrong}, D.~J. and {Acu{\~n}a}, L. and {Aguichine}, A. and {Bourrier}, V. and {Gandhi}, S. and {Sousa}, S.~G. and {Delgado-Mena}, E. and {Moya}, A. and {Adibekyan}, V. and {Correia}, A.~C.~M. and {Barrado}, D. and {Damasso}, M. and {Winn}, J.~N. and {Santos}, N.~C. and {Barkaoui}, K. and {Barros}, S.~C.~C. and {Benkhaldoun}, Z. and {Bouchy}, F. and {Brice{\~n}o}, C. and {Caldwell}, D.~A. and {Collins}, K.~A. and {Essack}, Z. and {Ghachoui}, M. and {Gillon}, M. and {Hounsell}, R. and {Jehin}, E. and {Jenkins}, J.~M. and {Keniger}, M.~A.~F. and {Law}, N. and {Mann}, A.~W. and {Nielsen}, L.~D. and {Pozuelos}, F.~J. and {Schanche}, N. and {Seager}, S. and {Tan}, T. -G. and {Timmermans}, M. and {Villase{\~n}or}, J. and {Watkins}, C.~N. and {Ziegler}, C.},
+        title = "{TOI-5005 b: A super-Neptune in the savanna near the ridge}",
+      journal = {arXiv e-prints},
+     keywords = {Astrophysics - Earth and Planetary Astrophysics},
+         year = 2024,
+        month = sep,
+          eid = {arXiv:2409.18129},
+        pages = {arXiv:2409.18129},
+archivePrefix = {arXiv},
+       eprint = {2409.18129},
+ primaryClass = {astro-ph.EP},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2024arXiv240918129C},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
 ```
 and add the following sentence within the acknowledgements section:
 
