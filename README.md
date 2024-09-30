@@ -20,7 +20,7 @@ If you have any problems with the installation, you can drop an issue [here](htt
 
 #### Python through the terminal
 
-You just need to have a configuration file *[my_config_file.ini](https://github.com/castro-gzlz/mr-plotter/blob/main/config/my_config_file.ini)* inside the [*config*](https://github.com/castro-gzlz/mr-plotter/tree/main/config) folder and then type
+You just need to have a configuration file (e.g. [TOI-5005_S65.ini](https://github.com/castro-gzlz/TESS-cont/blob/main/config/TOI-5005_S65.ini))* inside the [*config*](https://github.com/castro-gzlz/mr-plotter/tree/main/config) folder and then type
 
 ```
 python TESS-cont.py my_config_file.ini
