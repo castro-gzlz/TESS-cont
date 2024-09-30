@@ -85,13 +85,13 @@ Since those values (**2-28%**) are lower than the unphysical threshold of 100%, 
 
 | Parameter  | Possible values | Description |
 | ------------- | ------------- | ------------- |
-| sector | Any number| TESS sector to be analysed. *Default*: first with observations |
-| n_sources | Any number | Contaminant sources to study individually. Default: 5 |
-| gaia_catalog | DR2 or DR3 | Gaia catalog. Default: DR3 |
-| target_name | Any name | Target name. Default: Target |
-| plot_target_name | True or False | Specify the target name in the plots. Default: False|
-| loc_legend | best, upper left, center, etc | Location of the legend (heatmap plot). Default: best |
-| img_fmt | png or pdf | Format of output images. Default: pdf |
+| sector | Any number| TESS sector to be analysed. **Default**: first with observations |
+| n_sources | Any number | Contaminant sources to study individually. **Default**: 5 |
+| gaia_catalog | DR2 or DR3 | Gaia catalog. **Default**: DR3 |
+| target_name | Any name | Target name. **Default**: Target |
+| plot_target_name | True or False | Specify the target name in the plots. **Default**: False|
+| loc_legend | best, upper left, center, etc | Location of the legend (heatmap plot). **Default**: best |
+| img_fmt | png or pdf | Format of output images. **Default**: pdf |
 
 #### [DILUTION] | Arguments for the **DILUTION** analysis
 
