@@ -20,11 +20,11 @@ If you have any problems with the installation, you can drop an issue [here](htt
 
 #### Python through the terminal
 
-You just need to have a configuration file (e.g. [TOI-5005_S65.ini](https://github.com/castro-gzlz/TESS-cont/blob/main/config/TOI-5005_S65.ini)) inside the [*config*](https://github.com/castro-gzlz/TESS-cont/tree/main/config) folder and type
+You just need to have a configuration file (e.g. [*TOI-5005_S65.ini*](https://github.com/castro-gzlz/TESS-cont/blob/main/config/TOI-5005_S65.ini)) inside the [*config*](https://github.com/castro-gzlz/TESS-cont/tree/main/config) folder and type
 ```
 python TESS-cont.py TOI-5005_S65.ini
 ```
-The file *my_config_file.ini* should contain all the necessary information to make the analysis, which will be saved into the *[output](https://github.com/castro-gzlz/TESS-cont/tree/main/output)* folder. In the [Configuration file](#configuration-file) section we describe **all the parameters** that can be used in the configuration files.
+The file *TOI-5005_S65.ini* should contain all the necessary information to make the analysis, which will be saved into the *[output](https://github.com/castro-gzlz/TESS-cont/tree/main/output)* folder. In the [Configuration file](#configuration-file) section we describe **all the parameters** that can be used in the configuration files.
 
 
 #### Python through Jupyter Notebook
