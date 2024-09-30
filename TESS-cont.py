@@ -44,7 +44,7 @@ from astropy.visualization.mpl_normalize import ImageNormalize
 
 #@|Uncomment this line for the tess-cont.ipynb version
 #@|#####--Configuration file--#########
-#config_file = 'TOI-5005_S65.ini'
+#config_file = 'TOI-4479_S41.ini'
 #@|####################################
 
 
@@ -381,6 +381,12 @@ print(f'There are {len(table)} stars surrounding {target_name} within a radius o
 # In[ ]:
 
 
+
+
+
+# In[ ]:
+
+
 #@|from tpfplotter (J.Lillo-Box)
 #@|https://github.com/jlillo/tpfplotter
 def get_dr2_id_from_tic(tic):
@@ -412,6 +418,12 @@ if tpf_or_tesscut == 'tpf':
     gaia_dr3_target = get_dr2_id_from_tic(str(tic))
 idx_target = np.where(table['Source'] == gaia_dr3_target)[0][0]
 #print(idx_target)
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
@@ -867,10 +879,8 @@ gs.update(left=0.05, right=0.95, bottom=0.12, top=0.95, wspace=0.01, hspace=0.03
 ax1 = plt.subplot(gs[0,0])
 maskcolor = 'red'
 
-norm = ImageNormalize(stretch=stretching.LogStretch(), vmin = 0.1, vmax = 99)
-norm = ImageNormalize(vmin = 0.1, vmax = 99)
-#norm = ImageNormalize(vmin = 0.1, vmax = 99)
-#norm = ImageNormalize( vmin = -15, vmax = 115)
+norm = ImageNormalize(stretch=stretching.LogStretch(), vmin = 0.1, vmax = 99) 
+#norm = ImageNormalize(vmin = 0.1, vmax = 99)                                  
 
 splot = plt.imshow(CROWDSAP_pixel_by_pixel*100,                   zorder=0,alpha =1, 
           extent=[tpf.column-0.5,tpf.column+nx-0.5,tpf.row+ny-0.5,tpf.row-0.5], norm = norm, cmap = 'viridis')
@@ -1006,18 +1016,20 @@ print('\033[1m' + f'Your heatmap {target_name}_S{sector}_heatmap.pdf/png has bee
 
 
 #@|we obtain the TIC IDs (tic_names_selected) of the n_sources from the Gaia DR2 IDS
-tic_names_selected = []
-for i in range(n_sources):
+#@|----This functionality is deprecated due to the limited number of TICs found-----
+
+#tic_names_selected = []
+#for i in range(n_sources):
     
-    try:
-        cat = Catalogs.query_object(f'Gaia_DR3_{gaia_names_selected[i]}', catalog="TIC")
-        idx_cat = np.where(cat['GAIA'].value.data == str(gaia_names_selected[i]))[0][0]
-        tic_names_selected.append(cat['ID'][idx_cat])
+    #try:
+        #cat = Catalogs.query_object(f'Gaia_DR3_{gaia_names_selected[i]}', catalog="TIC")
+        #idx_cat = np.where(cat['GAIA'].value.data == str(gaia_names_selected[i]))[0][0]
+        #tic_names_selected.append(cat['ID'][idx_cat])
         
-    except:
-        #print(f'No TIC number found for Gaia_DR3_{gaia_names_selected[i]} ')
-        tic_names_selected.append('No TIC ID found')
-        continue
+    #except:
+        ##print(f'No TIC number found for Gaia_DR3_{gaia_names_selected[i]} ')
+        #tic_names_selected.append('No TIC ID found')
+        #continue
 
 
 # In[ ]:
@@ -1031,7 +1043,7 @@ for i in range(n_sources):
 
 f = open(f'output/{target_name}/{target_name}_S{sector}_contaminant_sources.dat', 'w+')
 
-header = ['Gaia_ID,TIC_ID,total_cont(%),rel_cont(%) \n']
+header = ['Star,Gaia_ID,total_cont(%),rel_cont(%) \n']
 f.writelines(header)
 
 for i in range(n_sources):
@@ -1039,14 +1051,14 @@ for i in range(n_sources):
     crowdsap_sorted_ac = crowdsap_sorted[-n_sources:][::-1][i] * 100 #(in %)
     total_cont_ac = relative_contam_sorted[:n_sources][i] * 100 #(in %)
     
-    L = [str(gaia_names_selected[i])+','+str(tic_names_selected[i])+','+str(round(crowdsap_sorted_ac, 4))         +','+str(round(total_cont_ac, 4))+'\n']
+    L = [str(i+1)+','+str(gaia_names_selected[i])+','+str(round(crowdsap_sorted_ac, 4))         +','+str(round(total_cont_ac, 4))+'\n']
     f.writelines(L)
     
 #####################---rep---###############   
 
 f = open(f'output/{target_name}/{target_name}_S{sector}_contaminant_sources.dat', 'w+')
 
-header = ['Gaia_ID,TIC_ID,total_cont(%),rel_cont(%) \n']
+header = ['Star,Gaia_ID,total_cont(%),rel_cont(%) \n']
 f.writelines(header)
 
 for i in range(n_sources):
@@ -1054,17 +1066,11 @@ for i in range(n_sources):
     crowdsap_sorted_ac = crowdsap_sorted[-n_sources:][::-1][i] * 100 #(in %)
     total_cont_ac = relative_contam_sorted[:n_sources][i] * 100 #(in %)
     
-    L = [str(gaia_names_selected[i])+','+str(tic_names_selected[i])+','+str(round(crowdsap_sorted_ac, 4))         +','+str(round(total_cont_ac, 4))+'\n']
+    L = [str(i+1)+','+str(gaia_names_selected[i])+','+str(round(crowdsap_sorted_ac, 4))         +','+str(round(total_cont_ac, 4))+'\n']
     f.writelines(L)
     
 
 print('\033[1m' + f'The list of the {n_sources} most contaminant sources has been saved in {target_name}_S{sector}_contaminant_sources.dat'+'\033[0m')
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -1080,7 +1086,6 @@ print('\033[1m' + f'The list of the {n_sources} most contaminant sources has bee
 
 if transit_depth_analysis:
     
-    
     if td_unit == 'ppm':
         td = td / 1e6 #transit depth (0-1)
     if td_unit == 'ppt':
@@ -1091,7 +1096,6 @@ if transit_depth_analysis:
     #@|transit depth uncorrected (e.g. SPOC td obtained from PDCSAP photometry)
     if dilution_corr == True:
         td = td * CROWDSAP
-        
         
     f = open(f'output/{target_name}/{target_name}_S{sector}_undituled_transit_depths.dat', 'w+')
 
@@ -1104,7 +1108,7 @@ if transit_depth_analysis:
     #if td_unit == 'frac':
         #header = ['Gaia_ID,TIC_ID,transit_depth \n']
         
-    header = ['Gaia_ID,TIC_ID,transit_depth(%) \n']
+    header = ['Star,Gaia_ID,transit_depth(%) \n']
 
     f.writelines(header)
 
@@ -1124,7 +1128,7 @@ if transit_depth_analysis:
             
         td_undiluted = td / crowdsap_sorted[-n_sources:][::-1][i]
 
-        L = [str(gaia_names_selected[i])+','+str(tic_names_selected[i])+','+str(td_undiluted*100)+'\n']
+        L = [str(i+1)+','+str(gaia_names_selected[i])+','+str(td_undiluted*100)+'\n']
         f.writelines(L)
     
     
@@ -1141,7 +1145,7 @@ if transit_depth_analysis:
     #if td_unit == 'frac':
         #header = ['Gaia_ID,TIC_ID,transit_depth \n']
         
-    header = ['Gaia_ID,TIC_ID,transit_depth(%) \n']
+    header = ['Star,Gaia_ID,transit_depth(%) \n']
 
     f.writelines(header)
 
@@ -1161,7 +1165,7 @@ if transit_depth_analysis:
 
         td_undiluted = td / crowdsap_sorted[-n_sources:][::-1][i]
         
-        L = [str(gaia_names_selected[i])+','+str(tic_names_selected[i])+','+str(td_undiluted*100)+'\n']
+        L = [str(i+1)+','+str(gaia_names_selected[i])+','+str(td_undiluted*100)+'\n']
         f.writelines(L)
         
         
@@ -1180,18 +1184,6 @@ else:
     print('      Thank you for using TESS-cont :-D We hope to see you again soon!')
     print('     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
     print('')
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
