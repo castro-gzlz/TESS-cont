@@ -61,12 +61,12 @@ python TESS-cont.py TOI-4479_S41.ini
 This star was found to have a planet candidate, TOI-4479.01, with a transit depth of 3471 ppm (parts per million) according to [ExoFOP](https://exofop.ipac.caltech.edu/tess/target.php?id=126606859), which was later confirmed to be a planet by [Esparza-Borges et al. (2022)](https://ui.adsabs.harvard.edu/abs/2022A%26A...666A..10E/abstract). We here use the *TESS-cont* **DILUTION** feature **to know whether we can discard the nearby contaminant sources as being the origin of the signal found** based on the TESS photometry alone. By introducing the measured transit depth, and selecting ```dilution_corr: True``` (since the SPOC transit depths are already corrected for dilution), we find that the observed transit signal **could have originated in the six most contaminant stars** with the following depths: 
 
 <sup> **Gaia_ID,TIC_ID,transit_depth(%)** <br /> 
-1841177816084707584,No TIC ID found,**1.74** <br />
-1841177816084683648,No TIC ID found,**6.01** <br />
-1841178129618984960,No TIC ID found,**8.26** <br />
-1841177717302124288,No TIC ID found,**11.27** <br />
-1841178232698201216,No TIC ID found,**24.36** <br />
-1841177682942388608,No TIC ID found,**27.66**  </sup>
+1,1841177816084707584,1.7403903685440747 <br /> 
+2,1841177816084683648,6.1003994779136645 <br /> 
+3,1841178129618984960,8.259499064318598 <br /> 
+4,1841177717302124288,11.302802447499644 <br /> 
+5,1841178232698201216,24.34951217270749 <br /> 
+6,1841177682942388608,27.693707270804325  </sup>
 
 Since those values (**2-28%**) are lower than the unphysical threshold of 100%, we cannot discard that they could be the origin of the transit signal found based on the TESS data alone (e.g. [Castro-González et al. 2020](https://ui.adsabs.harvard.edu/abs/2020MNRAS.499.5416C/abstract); [de Leon et al. 2021](https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)). This example reveals the necessity of **higher-spatial resolution observations** (e.g. ground-based photometry or spectroscopy) to confidently **discard those contaminant sources**. 
 
