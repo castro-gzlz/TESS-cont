@@ -98,7 +98,7 @@ Since those values (**2-28%**) are lower than the unphysical threshold of 100%, 
 | Parameter  | Possible values | Description |
 | ------------- | ------------- | ------------- |
 | td | Any number| Measured transit depth in the target star |
-| dilution_corr | True or False | The measured depth is corrected for dilution (e.g. SPOC depths). Default: True  |
+| dilution_corr | True or False | The measured depth is corrected for dilution (e.g. SPOC). Default: True  |
 | td_unit | ppm, ppt, per, frac | Unit of the measured transit depth |
 
 ## Credits
