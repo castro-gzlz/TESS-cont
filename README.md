@@ -75,7 +75,7 @@ Since those values (**2-28%**) are lower than the unphysical threshold of 100%, 
 
 By default, *TESS-cont* interpolates the PRFs to **all the pixels with *Gaia* sources, which might take several minutes**. To **streamline this process**, we have implemented a **fast approximate method** that can be easily activated through ```method_prf: approximate``` within the [OPTIONAL] section. This method **interpolates the PRF only once** (in the middle of the TPF/FFI), before locating it in its corresponding position, assuming that its shape does not vary much across the nearby pixels. 
 
-This approximate method **typically provides very similar results** to the default ```method_prf: accurate``` method, so it and can be **useful to have a first hint** of the contamination level affecting your target (especially in higlhy crowded fields). However, **we always encourage to use the accurate method for final analyses/publications**. We haved coded *TESS-cont* so that the PRFs of stars in common pixels are only computed once, and hence **even in highly crowded fields the computational cost should not surpass ~5 minutes**. 
+This approximate method **typically provides very similar results** to the default ```method_prf: accurate``` method, so it and can be **useful to have a first hint** of the contamination level affecting your target (especially in higlhy crowded fields). However, **we encourage to use the accurate method for final analyses/publications**. We haved coded *TESS-cont* so that the PRFs of stars in common pixels are only computed once, and hence **even in highly crowded fields the computational cost should not surpass ~5 minutes**. 
 
 ## Other uses and precautions
 
