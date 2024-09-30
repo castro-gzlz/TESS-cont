@@ -71,7 +71,7 @@ This star was found to have a planet candidate, TOI-4479.01, with a transit dept
 Since those values (**2-28%**) are lower than the unphysical threshold of 100%, we cannot discard that they could be the origin of the transit signal found based on the TESS data alone (e.g. [Castro-González et al. 2020](https://ui.adsabs.harvard.edu/abs/2020MNRAS.499.5416C/abstract); [de Leon et al. 2021](https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)). This example reveals the necessity of **higher-spatial resolution observations** (e.g. ground-based photometry or spectroscopy) to confidently **discard those contaminant sources**. 
 
 
-## Computational cost: Approximate (fast) vs. accurate (slower) method
+## Computational cost. Approximate (fast) vs accurate (slower) method
 
 By default, *TESS-cont* interpolates the PRFs to **all the pixels with *Gaia* sources, which might take several minutes**. To **streamline this process**, we have implemented a **fast approximate method** that can be easily activated through ```method_prf: approximate``` within the [OPTIONAL] section. This method **interpolates the PRF only once** (in the middle of the TPF/FFI), before locating it in its corresponding position, assuming that its shape does not vary much across the nearby pixels. 
 
