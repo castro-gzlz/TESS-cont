@@ -117,8 +117,6 @@ This approximate method **typically provides very similar results** to the defau
 
 ## Credits
 
-## Credits
-
 If you use *TESS-cont*, please give credit to [this work](https://ui.adsabs.harvard.edu/abs/2024arXiv240918129C/abstract): 
 
 ```
