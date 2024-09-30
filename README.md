@@ -24,8 +24,7 @@ You just need to have a configuration file (e.g. [*TOI-5005_S65.ini*](https://gi
 ```
 python TESS-cont.py TOI-5005_S65.ini
 ```
-The configuration file *TOI-5005_S65.ini* should contain all the necessary information to make the analysis, which will be saved into the *[output](https://github.com/castro-gzlz/TESS-cont/tree/main/output)* folder. In the [Configuration file](#configuration-file) section we describe **all the parameters** that can be used in the configuration files.
-
+In the [Configuration file](#configuration-file) section we describe **all the parameters** that can be used in the configuration files.
 
 #### Python through Jupyter Notebook
 
