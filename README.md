@@ -91,7 +91,7 @@ Since those values (**2-28%**) are lower than the unphysical threshold of 100%, 
 | target_name | Any name | Target name. **Default**: Target |
 | plot_target_name | True or False | Specify the target name in the plots. **Default**: False|
 | loc_legend | best, upper left, center, etc | Location of the legend (heatmap plot). **Default**: best |
-| img_fmt | png or pdf | Format of output images. **Default**: pdf |
+| img_fmt | pdf, png, or pdfpng | Format of output images. **Default**: pdfpng |
 
 #### [DILUTION] | Arguments for the **DILUTION** analysis
 
