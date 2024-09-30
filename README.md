@@ -4,7 +4,7 @@
 
 ![Presentación sin título(2)-cropped](https://github.com/user-attachments/assets/59ef2a7f-f7db-4c9a-aa74-ec2ff71dc1a7)
 
-The *TESS-cont* algorithm is based on building the Pixel Response Functions (PRFs) of nearby *Gaia* sources and computing their flux distributions across the TESS Target Pixel Files (TPFs) or Full Frame Images (FFIs). A more detailed description can be found in Section 2.1.2 of [this work](https://ui.adsabs.harvard.edu/abs/2024arXiv240918129C/abstract).
+The *TESS-cont* algorithm is based on building the pixel response functions (PRFs) of nearby *Gaia* sources and computing their flux distributions across the TESS Target Pixel Files (TPFs) or Full Frame Images (FFIs). A more detailed description can be found in Section 2.1.2 of [this work](https://ui.adsabs.harvard.edu/abs/2024arXiv240918129C/abstract).
 
 ## Installation & Requirements
 
