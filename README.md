@@ -81,7 +81,7 @@ This approximate method **typically provides very similar results** to the defau
 
 **Other usese**. *TESS-cont* can be also used to **generate custom apertures** based on the computed pixel-by-pixel contamination. We can select a certain threshold (e.g. 60%) of flux coming from the target star, and generate and save an aperture that meets such a threshold. This feature 
 
-**Precaution**. By default, *TESS-cont* uses the *Gaia* DR3 catalog. However, the TIC catalog (and SPOC PDCSAP photometry) is stacked to *Gaia* DR2. Therefore, to understand the TESS PDCSAP photometry, the DR2 catalog should be considered as an [OPTIONAL](#optional--optional-parameters) argument: ```gaia_catalog: DR2```. **We highly encourage to run *TESS-cont* based both in the DR2 and DR3 catalog and ensure that there are no major differences**. If there were, it would be recomendable to correct your own PDCSAP/SAP photometry from crowding as explained [in this tutorial](https://heasarc.gsfc.nasa.gov/docs/tess/UnderstandingCrowding.html). 
+**Precaution**. By default, *TESS-cont* uses the *Gaia* DR3 catalog. However, the TIC catalog (and SPOC PDCSAP photometry) is stacked to *Gaia* DR2. Therefore, to understand the TESS PDCSAP photometry, the DR2 catalog should be considered as an [OPTIONAL](#optional--optional-parameters) argument: ```gaia_catalog: DR2```. **We highly encourage to run *TESS-cont* based in the DR2 AND DR3 catalog to ensure that there are no major differences**. If there were, it would be recomendable to correct your own PDCSAP/SAP photometry from crowding as explained [in this tutorial](https://heasarc.gsfc.nasa.gov/docs/tess/UnderstandingCrowding.html). 
 
 ## Configuration file
 
