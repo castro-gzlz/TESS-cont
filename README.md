@@ -79,17 +79,11 @@ This approximate method **typically provides very similar results** to the defau
 
 ## Other uses, contamination metrics, and precautions
 
-### Other uses
+**Other uses**. *TESS-cont* can be also used to **generate custom apertures** based on the computed pixel-by-pixel contamination. We can select a certain threshold (e.g. 80%) of flux coming from the target star, and generate and save an aperture that meets such a threshold. This feature is currently not documented, but you can drop me a message and I'll be happy to help.
 
-*TESS-cont* can be also used to **generate custom apertures** based on the computed pixel-by-pixel contamination. We can select a certain threshold (e.g. 80%) of flux coming from the target star, and generate and save an aperture that meets such a threshold. This feature is currently not documented, but you can drop me a message and I'll be happy to help.
+**Contamination metrics**. A **by-product** of the *TESS-cont* operation is the computation of the *CROWDSAP* and *FLFRCSAP* metrics. These are automatically saved the [metrics.dat](https://github.com/castro-gzlz/TESS-cont/blob/main/metrics.dat) file. We encourage to ensure that there are no major differences with the official TESS metrics. If this was the case, it could be probably related to a discrepancy between the DR3 and DR2 *Gaia* catalogs. 
 
-### Contamination metrics 
-
-A **by-product** of the *TESS-cont* operation is the computation of the **CROWDSAP** and **FLFRCSAP** metrics. These are automatically saved the [metrics.dat](https://github.com/castro-gzlz/TESS-cont/blob/main/metrics.dat) file. We encourage to ensure that there are no major differences with the official TESS metrics. If this was the case, it could be probably related to a discrepancy between the DR3 and DR2 *Gaia* catalogs. 
-
-### Precautions
-
-By default, *TESS-cont* uses the *Gaia* DR3 catalog. However, the TIC catalog (and SPOC PDCSAP) is stacked to *Gaia* DR2. Therefore, to understand the TESS PDCSAP photometry, the DR2 catalog should be considered as an [OPTIONAL](#optional--optional-parameters) argument: ```gaia_catalog: DR2```. **We highly encourage to run *TESS-cont* based in the DR2 AND DR3 catalog to ensure that there are no major differences**. If there were, it would be recomendable to correct your own PDCSAP/SAP photometry from crowding as explained [in this tutorial](https://heasarc.gsfc.nasa.gov/docs/tess/UnderstandingCrowding.html). 
+**Precautions**. By default, *TESS-cont* uses the *Gaia* DR3 catalog. However, the TIC catalog (and SPOC PDCSAP) is stacked to *Gaia* DR2. Therefore, to understand the TESS PDCSAP photometry, the DR2 catalog should be considered as an [OPTIONAL](#optional--optional-parameters) argument: ```gaia_catalog: DR2```. **We highly encourage to run *TESS-cont* based in the DR2 AND DR3 catalog to ensure that there are no major differences**. If there were, it would be recomendable to correct your own PDCSAP/SAP photometry from crowding as explained [in this tutorial](https://heasarc.gsfc.nasa.gov/docs/tess/UnderstandingCrowding.html). 
 
 ## Configuration file
 
