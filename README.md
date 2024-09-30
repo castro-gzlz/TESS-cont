@@ -85,7 +85,7 @@ Since those values (**2-28%**) are lower than the unphysical threshold of 100%, 
 
 | Parameter  | Possible values | Description |
 | ------------- | ------------- | ------------- |
-| sector | Any number| TESS sector to be analysed || Default: first with observations |
+| sector | Any number| TESS sector to be analysed. *Default*: first with observations |
 | n_sources | Any number | Contaminant sources to study individually. Default: 5 |
 | gaia_catalog | DR2 or DR3 | Gaia catalog. Default: DR3 |
 | target_name | Any name | Target name. Default: Target |
