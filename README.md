@@ -24,7 +24,7 @@ You just need to have a configuration file (e.g. [*TOI-5005_S65.ini*](https://gi
 ```
 python TESS-cont.py TOI-5005_S65.ini
 ```
-In the [Configuration file](#configuration-file) section we describe **all the parameters** that can be used in the configuration files.
+In the [Configuration file](#configuration-file) section we describe **all the parameters** that can be used.
 
 #### Python through Jupyter Notebook
 
