@@ -105,7 +105,7 @@ This approximate method **typically provides very similar results** to the defau
 | gaia_catalog | DR2 or DR3 | Gaia catalog. **Default**: DR3 |
 | target_name | Any name | Target name. **Default**: Target |
 | plot_target_name | True or False | Specify the target name in the plots. **Default**: False|
-| loc_legend | best, upper left, center, etc | Location of the legend (heatmap plot). **Default**: best |
+| loc_legend | best, upper left, etc | Location of the legend (heatmap plot). **Default**: best |
 | img_fmt | pdf, png, or pdfpng | Format of output images. **Default**: pdfpng |
 | search_radius | Any number | Search radius of *Gaia* sources (in arcsec). **Default**: 200 |
 | plot_main_contaminants | True or False | Plot the n_sources most contaminants. **Default**: True |
