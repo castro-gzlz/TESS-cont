@@ -108,7 +108,6 @@ This approximate method **typically provides very similar results** to the defau
 | loc_legend | best, upper left, etc | Location of the legend (heatmap plot). **Default**: best |
 | img_fmt | pdf, png, or pdfpng | Format of output images. **Default**: pdfpng |
 | search_radius | Any number | Search radius of *Gaia* sources (in arcsec). **Default**: 200 |
-| plot_main_contaminants | True or False | Plot the n_sources most contaminants. **Default**: True |
 | plot_all_gaia | True or False | Plot all *Gaia* nearby sources. **Default**: True |
 | plot_percentages | True or False | Write the target's flux percentages. **Default**: True |
 | scale_factor | Any number | Scale factor for the stars. **Default**: 4000 |
