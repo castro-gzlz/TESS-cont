@@ -44,7 +44,7 @@ from astropy.visualization.mpl_normalize import ImageNormalize
 
 #@|Uncomment this line for the tess-cont.ipynb version
 #@|#####--Configuration file--#########
-#config_file = 'TOI-4479_S41.ini'
+#config_file = 'TOI-5005_S65.ini'
 #@|####################################
 
 
@@ -88,10 +88,6 @@ except:
     pass
 try:
     APERTURE = config_object['APERTURE']
-except:
-    pass
-try:
-    HEATMAP = config_object['HEATMAP']
 except:
     pass
 try:
@@ -186,9 +182,44 @@ except:
     plot_target_name = False
     
     
-#@|-------------------
-#@|APERTURE arguments
-#@|-------------------  
+#@|---------(HEATMAP arguments)-------------
+
+#@|plot target star 
+try:
+    plot_target = OPTIONAL['plot_target'] == 'True'
+except:
+    plot_target = True
+
+#@|plot main contaminant sources
+try:
+    plot_main_contaminants = OPTIONAL['plot_main_contaminants'] == 'True'
+except:
+    plot_main_contaminants = True
+
+#@|plot all Gaia sources
+try:
+    plot_all_gaia = OPTIONAL['plot_all_gaia'] == 'True'
+except:
+    plot_all_gaia = True
+    
+    
+#@|Overplot the flux ratio from the target star
+
+try:
+    plot_percentages =  OPTIONAL['plot_percentages'] == 'True'
+except:
+    plot_percentages = True
+    
+#@|scale factor for the stars. Disk area scales with flux emission
+try:
+    scale_factor = float(OPTIONAL['scale_factor'])
+except:
+    scale_factor = 4000
+    
+    
+#@|-----------------------------------------------------------------------------------------------
+#@|APERTURE arguments | not documented. For details, please email me at acastro@cab.inta-csic.es
+#@|------------------------------------------------------------------------------------------------  
 
 #@|aperture: pipeline, threshold_target_flux, or threshold_median_flux
 try:
@@ -213,42 +244,6 @@ try:
     save_aper = APERTURE['save_aper'] == 'True'
 except:
     save_aper = False
-    
-#@|-------------------
-#@|HEATMAP arguments
-#@|-------------------
-
-#@|plot target star 
-try:
-    plot_target = HEATMAP['plot_target'] == 'True'
-except:
-    plot_target = True
-
-#@|plot main contaminant sources
-try:
-    plot_main_contaminants = HEATMAP['plot_main_contaminants'] == 'True'
-except:
-    plot_main_contaminants = True
-
-#@|plot all Gaia sources
-try:
-    plot_all_gaia = HEATMAP['plot_all_gaia'] == 'True'
-except:
-    plot_all_gaia = True
-    
-    
-#@|Overplot the flux ratio from the target star
-
-try:
-    plot_percentages =  HEATMAP['plot_percentages'] == 'True'
-except:
-    plot_percentages = True
-    
-#@|scale factor for the stars. Disk area scales with flux emission
-try:
-    scale_factor = float(HEATMAP['scale_factor'])
-except:
-    scale_factor = 4000
     
 #@|-------------------------
 #@|DILUTION arguments
