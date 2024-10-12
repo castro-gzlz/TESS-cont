@@ -113,7 +113,7 @@ This approximate method **typically provides very similar results** to the defau
 | plot_percentages | True or False | Write the target's flux percentages. **Default**: True |
 | scale_factor | Any number | Scale factor for the stars. **Default**: 4000 |
 | tpf_or_tesscut | tpf or tesscut | TPF or FFI tesscut. **Default**: tpf |
-| cutout_size| Any number, Any number | Size of the FFI tesscut. **Default**: 11,11 |
+| cutout_size| Number, Number | Size of the FFI tesscut. **Default**: 11,11 |
 
 #### [DILUTION] | Arguments for the **DILUTION** analysis
 
