@@ -99,7 +99,7 @@ This approximate method **typically provides very similar results** to the defau
 
 | Parameter  | Possible values | Description |
 | ------------- | ------------- | ------------- |
-| sector | Any number| TESS sector to be analysed. **Default**: first with observations |
+| sector | Any number| TESS sector. **Default**: first with observations |
 | method_prf | accurate or approximate | Method to compute the PRFs. **Default**: accurate |
 | n_sources | Any number | Contaminant sources to study individually. **Default**: 5 |
 | gaia_catalog | DR2 or DR3 | Gaia catalog. **Default**: DR3 |
