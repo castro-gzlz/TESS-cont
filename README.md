@@ -101,18 +101,18 @@ This approximate method **typically provides very similar results** to the defau
 | ------------- | ------------- | ------------- |
 | sector | Any number| TESS sector. **Default**: first with observations |
 | method_prf | accurate or approximate | Method to compute the PRFs. **Default**: accurate |
+| search_radius | Any number | Search radius of *Gaia* sources (in arcsec). **Default**: 200 |
 | n_sources | Any number | Contaminant sources to study individually. **Default**: 5 |
 | gaia_catalog | DR2 or DR3 | Gaia catalog. **Default**: DR3 |
 | target_name | Any name | Target name. **Default**: Target |
 | plot_target_name | True or False | Specify the target name in the plot. **Default**: False|
-| loc_legend | best, upper left, etc | Location of the legend (heatmap plot). **Default**: best |
-| img_fmt | pdf, png, or pdfpng | Format of output images. **Default**: pdfpng |
-| search_radius | Any number | Search radius of *Gaia* sources (in arcsec). **Default**: 200 |
 | plot_all_gaia | True or False | Plot all *Gaia* nearby sources. **Default**: True |
 | plot_percentages | True or False | Write the target's flux percentages. **Default**: True |
+| loc_legend | best, upper left, etc | Location of the legend (heatmap plot). **Default**: best |
 | scale_factor | Any number | Scale factor for the stars. **Default**: 4000 |
 | tpf_or_tesscut | tpf or tesscut | TPF or FFI tesscut. **Default**: tpf |
 | cutout_size| Number, Number | Size of the FFI tesscut. **Default**: 11,11 |
+| img_fmt | pdf, png, or pdfpng | Format of output images. **Default**: pdfpng |
 
 #### [DILUTION] | Arguments for the **DILUTION** analysis
 
