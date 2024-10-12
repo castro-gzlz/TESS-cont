@@ -1,6 +1,6 @@
 # TESS-cont: The TESS contamination tool
 
-*TESS-cont* is a **user-friendly** Python tool to **quantify the flux fraction** coming from **nearby stars** in the **TESS photometric aperture** of **any observed target**. The package **(1)** identifies the main contaminant *Gaia* DR2/DR3 sources, **(2)** quantifies their individual and total flux contributions to the selected aperture (i.e. SPOC or custom), and **(3)** determines whether any of these stars could be the origin of the observed **transit** and **variability** signals. 
+*TESS-cont* is a **user-friendly** Python tool to **quantify the flux fraction** coming from **nearby stars** in the **TESS photometric aperture** of **any observed target**. The package **(1)** identifies the main contaminant *Gaia* DR2/DR3 sources, **(2)** quantifies their individual and total flux contributions to the aperture, and **(3)** determines whether any of these stars could be the origin of the observed **transit** and **variability** signals. 
 
 ![Presentación sin título(2)-cropped](https://github.com/user-attachments/assets/59ef2a7f-f7db-4c9a-aa74-ec2ff71dc1a7)
 
