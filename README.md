@@ -118,7 +118,7 @@ This approximate method **typically provides very similar results** to the defau
 
 | Parameter  | Possible values | Description |
 | ------------- | ------------- | ------------- |
-| td | Any number| Measured transit depth in the target star |
+| td | Any number| Measured transit depth in the target's aperture |
 | td_unit | ppm, ppt, per, frac | Unit of the measured transit depth |
 | dilution_corr | True or False | The measured depth is corrected for dilution (e.g. SPOC). **Default**: True  |
 
