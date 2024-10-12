@@ -100,12 +100,16 @@ This approximate method **typically provides very similar results** to the defau
 | Parameter  | Possible values | Description |
 | ------------- | ------------- | ------------- |
 | sector | Any number| TESS sector to be analysed. **Default**: first with observations |
+| method_prf | accurate or approximate | Method to compute the PRFs. **Default**: accurate |
 | n_sources | Any number | Contaminant sources to study individually. **Default**: 5 |
 | gaia_catalog | DR2 or DR3 | Gaia catalog. **Default**: DR3 |
 | target_name | Any name | Target name. **Default**: Target |
 | plot_target_name | True or False | Specify the target name in the plots. **Default**: False|
 | loc_legend | best, upper left, center, etc | Location of the legend (heatmap plot). **Default**: best |
 | img_fmt | pdf, png, or pdfpng | Format of output images. **Default**: pdfpng |
+| search_radius | Any number | Search radius of *Gaia* sources (in arcsec). **Default**: 200 |
+| tpf_or_tesscut | tpf or tesscut | TPF or FFI tesscut. **Default**: tpf |
+| cutout_size| Any number, Any number | Size of the FFI tesscut. **Default**: 11,11 |
 
 #### [DILUTION] | Arguments for the **DILUTION** analysis
 
