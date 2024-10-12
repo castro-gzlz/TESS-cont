@@ -108,9 +108,9 @@ This approximate method **typically provides very similar results** to the defau
 | loc_legend | best, upper left, center, etc | Location of the legend (heatmap plot). **Default**: best |
 | img_fmt | pdf, png, or pdfpng | Format of output images. **Default**: pdfpng |
 | search_radius | Any number | Search radius of *Gaia* sources (in arcsec). **Default**: 200 |
-| plot_main_contaminants | True or False | Plot the n_sources most contaminant stars. **Default**: True |
+| plot_main_contaminants | True or False | Plot the n_sources most contaminants. **Default**: True |
 | plot_all_gaia | True or False | Plot all *Gaia* nearby sources. **Default**: True |
-| plot_percentages | True or False | Overplot the flux ratio from the target star. **Default**: True |
+| plot_percentages | True or False | Plot the flux percentage from the target. **Default**: True |
 | scale_factor | Any number | Scale factor for the stars. Disk area scales with flux emission. **Default**: 4000 |
 | tpf_or_tesscut | tpf or tesscut | TPF or FFI tesscut. **Default**: tpf |
 | cutout_size| Any number, Any number | Size of the FFI tesscut. **Default**: 11,11 |
