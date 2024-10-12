@@ -110,7 +110,7 @@ This approximate method **typically provides very similar results** to the defau
 | search_radius | Any number | Search radius of *Gaia* sources (in arcsec). **Default**: 200 |
 | plot_main_contaminants | True or False | Plot the n_sources most contaminants. **Default**: True |
 | plot_all_gaia | True or False | Plot all *Gaia* nearby sources. **Default**: True |
-| plot_percentages | True or False | Plot the flux percentage from the target. **Default**: True |
+| plot_percentages | True or False | Plot the flux percentages from the target. **Default**: True |
 | scale_factor | Any number | Scale factor for the stars. Disk area scales with flux emission. **Default**: 4000 |
 | tpf_or_tesscut | tpf or tesscut | TPF or FFI tesscut. **Default**: tpf |
 | cutout_size| Any number, Any number | Size of the FFI tesscut. **Default**: 11,11 |
