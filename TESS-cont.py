@@ -44,7 +44,7 @@ from astropy.visualization.mpl_normalize import ImageNormalize
 
 #@|Uncomment this line for the tess-cont.ipynb version
 #@|#####--Configuration file--#########
-#config_file = 'TOI-5005_S65.ini'
+#config_file = 'TOI-5005_S65.in'
 #@|####################################
 
 
@@ -152,6 +152,11 @@ try:
     loc_legend = OPTIONAL['loc_legend']
 except:
     loc_legend = 'best'
+    
+try:
+    scale_heatmap = OPTIONAL['scale_heatmap']
+except:
+    scale_heatmap = 'natural'
     
 #@|number of contaminant sources to consider individually
 #@|(for the pie chart and heatmap)    
@@ -284,6 +289,12 @@ except:
 # In[ ]:
 
 
+
+
+
+# In[ ]:
+
+
 #@|------------------------------------------------------------------------------------------
 #@|we download the tpf (or tesscut) of the target to build the pixel response function (PRF).
 #@|------------------------------------------------------------------------------------------
@@ -301,7 +312,7 @@ if tpf_or_tesscut == 'tpf':
     try:
         #search_result = lk.search_targetpixelfile('TIC '+str(tic), sector = int(sector))
         search_result = lk.search_targetpixelfile(str(target), sector = int(sector))
-    except NameError: search_result = lk.search_targetpixelfile('TIC '+str(tic))
+    except NameError: search_result = lk.search_targetpixelfile(str(target))
     tpf = search_result.download()
     tic = tpf.targetid
     if len(search_result) == 0:
@@ -324,6 +335,12 @@ if tpf_or_tesscut == 'tesscut':
             print(f'Error: An error has occoured downloading the tesscut of TIC {tic} (sector {sector}).')
         except NameError: print(f'Error: An error has occoured downloading the tesscut of TIC {tic}.')
         sys.exit()
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
@@ -866,6 +883,12 @@ print('\033[1m' + f'Your pie chart {target_name}_S{sector}_piechart.pdf/png has 
 # In[ ]:
 
 
+
+
+
+# In[ ]:
+
+
 print(f'Generating the heatmap plot of {target_name} (Sector {sector}) ...')
 fig = plt.figure(figsize=(6.93, 5.5))
 _, ny, nx = np.shape(tpf)
@@ -874,8 +897,12 @@ gs.update(left=0.05, right=0.95, bottom=0.12, top=0.95, wspace=0.01, hspace=0.03
 ax1 = plt.subplot(gs[0,0])
 maskcolor = 'red'
 
-norm = ImageNormalize(stretch=stretching.LogStretch(), vmin = 0.1, vmax = 99) 
-#norm = ImageNormalize(vmin = 0.1, vmax = 99)                                  
+#@|heatmap scale
+
+if scale_heatmap == 'natural':
+    norm = ImageNormalize(vmin = 0, vmax = 100)
+else:
+    norm = ImageNormalize(stretch=stretching.LogStretch(), vmin = 0.1, vmax = 99)                                 
 
 splot = plt.imshow(CROWDSAP_pixel_by_pixel*100,                   zorder=0,alpha =1, 
           extent=[tpf.column-0.5,tpf.column+nx-0.5,tpf.row+ny-0.5,tpf.row-0.5], norm = norm, cmap = 'viridis')
@@ -957,7 +984,7 @@ legend_marker_size = 60
 def updatescatter(handle, orig):
     handle.update_from(orig)
     handle.set_sizes([legend_marker_size])
-plt.legend(loc = loc_legend, handler_map={PathCollection : HandlerPathCollection(update_func=updatescatter)},           framealpha=0.8, fontsize = 12).set_zorder(10000)
+plt.legend(loc = loc_legend, handler_map={PathCollection : HandlerPathCollection(update_func=updatescatter)},           framealpha=0.9, fontsize = 12).set_zorder(10000)
 
 #@|--------
 #@|COLORBAR
@@ -1179,6 +1206,12 @@ else:
     print('      Thank you for using TESS-cont :-D We hope to see you again soon!')
     print('     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
     print('')
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
