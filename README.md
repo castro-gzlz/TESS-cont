@@ -110,7 +110,7 @@ This approximate method **typically provides very similar results** to the defau
 | plot_percentages | True or False | Write the target's flux percentages. **Default**: True |
 | loc_legend | best, upper left, etc | Location of the legend (heatmap plot). **Default**: best |
 | scale_factor | Any number | Scale factor for the stars. **Default**: 4000 |
-| scale_heatmap | natural or log | Scale of the heatmap plot. **Default**: natural |
+| scale_heatmap | natural or log | Scale of the heatmap color code. **Default**: natural |
 | tpf_or_tesscut | tpf or tesscut | TPF or FFI tesscut. **Default**: tpf |
 | cutout_size| Number, Number | Size of the FFI tesscut. **Default**: 11,11 |
 | img_fmt | pdf, png, or pdfpng | Format of output images. **Default**: pdfpng |
