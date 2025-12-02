@@ -9,7 +9,7 @@
        style="margin-right: 20px; margin-bottom: 10px;">
   *TESS-cont* is a Python tool to **compute the flux contamination** from **nearby stars** in the **TESS aperture** of **any observed target**.
   
-  The package **(1)** identifies the main contaminant *Gaia* DR2 / DR3 sources, **(2)** computes their contributions to the aperture, and **(3)** determines whether any of these sources could be responsible for the **transit** and/or **activity** signals. The standard plotting output includes:  **(1)** heatmaps showing the flux fraction coming from the target star and **(2)** pie charts highlighting the most contaminant stars inside (and outside!) the aperture.
+  The package **(1)** identifies the main contaminant *Gaia* DR2 / DR3 sources, **(2)** computes their contributions to the aperture, and **(3)** determines whether any of these sources could be responsible for the **transit** and/or **activity** signals. The standard plotting output includes **heatmaps showing the flux fraction coming from the target star** and **pie charts highlighting the most contaminant stars** inside (and outside!) the aperture.
 
 </p>
 
