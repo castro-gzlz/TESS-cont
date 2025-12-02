@@ -11,7 +11,7 @@
   
   The package **(1)** identifies the main contaminant *Gaia* DR2 / DR3 sources, **(2)** computes their contributions to the aperture, and **(3)** determines whether any of these sources could be responsible for the **transit** and/or **activity** signals. The standard plotting output includes **heatmaps showing the flux fraction coming from the target star** and **pie charts highlighting the most contaminant stars** inside (and outside!) the aperture.
 
-The algorithm is based on building the PRFs of nearby sources and computing their flux distributions across the TESS TPFs/FFIs. A detailed description can be found in Section 2.1.2 of [this work](https://ui.adsabs.harvard.edu/abs/2024arXiv240918129C/abstract).
+The algorithm is based on building the PRFs of nearby sources and computing their flux distributions across the TESS TPFs/FFIs. A detailed description can be found in Section 2.1.2 of [this work](https://ui.adsabs.harvard.edu/abs/2024A%26A...691A.233C/abstract).
 
 </p>
 
