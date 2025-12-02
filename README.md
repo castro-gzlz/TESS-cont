@@ -11,11 +11,11 @@
   
   The package **(1)** identifies the main contaminant *Gaia* DR2 / DR3 sources, **(2)** computes their contributions to the aperture, and **(3)** determines whether any of these sources could be responsible for the **transit** and/or **activity** signals. The standard plotting output includes **heatmaps showing the flux fraction coming from the target star** and **pie charts highlighting the most contaminant stars** inside (and outside!) the aperture.
 
+The *TESS-cont* algorithm is based on building the pixel response functions (PRFs) of nearby *Gaia* sources and computing their flux distributions across the TESS Target Pixel Files (TPFs) or Full Frame Images (FFIs). A more detailed description can be found in Section 2.1.2 of [this work](https://ui.adsabs.harvard.edu/abs/2024arXiv240918129C/abstract).
+
 </p>
 
-*TESS-cont* is a **user-friendly** tool to **compute the flux contamination** from **nearby stars** in the **TESS aperture** of **any observed target**. 
-The package **(1)** identifies the main contaminant *Gaia* sources, **(2)** computes their individual and total flux contributions to the aperture, 
-and **(3)** determines whether any of these stars could be responsible for the observed **transit** and/or **activity** signals.
+
 
 
 
