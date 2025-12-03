@@ -3,7 +3,7 @@
 
 <p>
 
-  <img src="TESS-cont_logo" src="TESS-cont_logo" src="https://github.com/user-attachments/assets/54f991ed-f483-4e37-bc64-c52266ea2c69"
+  <img src="TESS-cont_logo" src="TESScont_logo" src="https://github.com/user-attachments/assets/1fa543af-d1f4-4d62-849d-6fbbd015107a"
        align="left"
        width="320"
        style="margin-right: 20px; margin-bottom: 10px;">
@@ -14,6 +14,8 @@
 The algorithm is based on building the PRFs of nearby sources and computing their flux distributions across the TESS TPFs/FFIs. A detailed description can be found in Section 2.1.2 of [this work](https://ui.adsabs.harvard.edu/abs/2024A%26A...691A.233C/abstract).
 
 </p>
+
+
 
 
 ## Installation & Requirements
