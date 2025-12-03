@@ -3,7 +3,7 @@
 
 <p>
 
-  <img src="TESS-cont_logo" src="TESScont_logo" src="https://github.com/user-attachments/assets/1fa543af-d1f4-4d62-849d-6fbbd015107a"
+  <img src="https://github.com/user-attachments/assets/f0c2132b-eaba-4eb7-bd75-d0c2af2575fb"
        align="left"
        width="320"
        style="margin-right: 20px; margin-bottom: 10px;">
@@ -16,6 +16,7 @@ The algorithm is based on building the PRFs of nearby sources and computing thei
 </p>
 
 
+<img width="1024" height="1024" alt="TESScont_logo" src="https://github.com/user-attachments/assets/f0c2132b-eaba-4eb7-bd75-d0c2af2575fb" />
 
 
 ## Installation & Requirements
