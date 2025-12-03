@@ -16,9 +16,6 @@ The algorithm is based on building the PRFs of nearby sources and computing thei
 </p>
 
 
-<img width="1024" height="1024" alt="TESScont_logo" src="https://github.com/user-attachments/assets/f0c2132b-eaba-4eb7-bd75-d0c2af2575fb" />
-
-
 ## Installation & Requirements
 
 **Clone or download** this folder on your computer. All the dependencies are widely used, so you probably already have them installed. However, if this is not the case, you can enter the folder via the terminal and type
