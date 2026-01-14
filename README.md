@@ -137,7 +137,7 @@ This approximate method **typically provides very similar results** to the defau
 
 If you use *TESS-cont*, please give credit to [this work](https://ui.adsabs.harvard.edu/abs/2024arXiv240918129C/abstract): 
 
-```
+```bibtex
 @ARTICLE{2024A&A...691A.233C,
        author = {{Castro-Gonz{\'a}lez}, A. and {Lillo-Box}, J. and {Armstrong}, D.~J. and {Acu{\~n}a}, L. and {Aguichine}, A. and {Bourrier}, V. and {Gandhi}, S. and {Sousa}, S.~G. and {Delgado-Mena}, E. and {Moya}, A. and {Adibekyan}, V. and {Correia}, A.~C.~M. and {Barrado}, D. and {Damasso}, M. and {Winn}, J.~N. and {Santos}, N.~C. and {Barkaoui}, K. and {Barros}, S.~C.~C. and {Benkhaldoun}, Z. and {Bouchy}, F. and {Brice{\~n}o}, C. and {Caldwell}, D.~A. and {Collins}, K.~A. and {Essack}, Z. and {Ghachoui}, M. and {Gillon}, M. and {Hounsell}, R. and {Jehin}, E. and {Jenkins}, J.~M. and {Keniger}, M.~A.~F. and {Law}, N. and {Mann}, A.~W. and {Nielsen}, L.~D. and {Pozuelos}, F.~J. and {Schanche}, N. and {Seager}, S. and {Tan}, T. -G. and {Timmermans}, M. and {Villase{\~n}or}, J. and {Watkins}, C.~N. and {Ziegler}, C.},
         title = "{TOI-5005 b: A super-Neptune in the savanna near the ridge}",
@@ -160,7 +160,7 @@ and add the following sentence within the acknowledgements section:
 
 > This work made use of \texttt{TESS-cont} (\url{https://github.com/castro-gzlz/TESS-cont}), which also made use of \texttt{tpfplotter} \citep{2020A&A...635A.128A} and \texttt{TESS-PRF} \citep{2022ascl.soft07008B}.
 
-```
+```bibtex
 @ARTICLE{2020A&A...635A.128A,
        author = {{Aller}, A. and {Lillo-Box}, J. and {Jones}, D. and {Miranda}, L.~F. and {Barcel{\'o} Forteza}, S.},
         title = "{Planetary nebulae seen with TESS: Discovery of new binary central star candidates from Cycle 1}",
@@ -180,7 +180,7 @@ archivePrefix = {arXiv},
 }
 ```
 
-```
+```bibtex
 @software{2022ascl.soft07008B,
        author = {{Bell}, Keaton J. and {Higgins}, Michael E.},
         title = "{TESS\_PRF: Display the TESS pixel response function}",
