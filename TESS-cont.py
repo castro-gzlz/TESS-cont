@@ -215,6 +215,12 @@ try:
 except:
     plot_percentages = True
     
+#@|Explicitly write 0% when there is no contamination (added by YGCF)
+try:
+    plot_zero = OPTIONAL['plot_zero'] == 'True'
+except:
+    plot_zero = True
+    
 #@|scale factor for the stars. Disk area scales with flux emission
 try:
     scale_factor = float(OPTIONAL['scale_factor'])
@@ -760,6 +766,15 @@ def get_hex_color_list(num_colors=5, saturation=0.4, value=1.0):
     
     return hex_colors
 
+#@|Transformation of previous color list (get_hex_color_list) to instead have rgb output (added by YGCF)
+def get_rgb_color_list(num_colors=5, saturation=0.4, value=1.0):
+    rgb_colors = []
+    hsv_colors = [[float(x / num_colors), saturation, value] for x in range(num_colors)]
+    for hsv in hsv_colors:
+        rgb = [x for x in hsv_to_rgb(*hsv)]
+        rgb_colors.append(rgb)
+    return rgb_colors
+
 
 # In[ ]:
 
@@ -902,7 +917,7 @@ maskcolor = 'red'
 if scale_heatmap == 'natural':
     norm = ImageNormalize(vmin = 0, vmax = 100)
 else:
-    norm = ImageNormalize(stretch=stretching.LogStretch(), vmin = 0.1, vmax = 99)                                 
+    norm = ImageNormalize(stretch=stretching.LogStretch(), vmin = 0.1, vmax = 99)                               
 
 splot = plt.imshow(CROWDSAP_pixel_by_pixel*100,                   zorder=0,alpha =1, 
           extent=[tpf.column-0.5,tpf.column+nx-0.5,tpf.row+ny-0.5,tpf.row-0.5], norm = norm, cmap = 'viridis')
@@ -912,7 +927,7 @@ for i in range(aperture_mask.shape[0]):
     for j in range(aperture_mask.shape[1]):
         if aperture_mask[i, j]:
             ax1.add_patch(patches.Rectangle((j+tpf.column-0.5, i+tpf.row-0.5),
-                                            1, 1, color=maskcolor, fill=True,alpha=0.2))
+                                            1, 1, color=maskcolor, fill=True,alpha=0.5))
             ax1.add_patch(patches.Rectangle((j+tpf.column-0.5, i+tpf.row-0.5), 
                                             1, 1, color=maskcolor, fill=False,alpha=1,lw=2))
                     
@@ -921,9 +936,12 @@ if plot_percentages:
                     
     for i in range(tpf.shape[1]):
         for j in range(tpf.shape[2]):
-            
             if np.round(CROWDSAP_pixel_by_pixel[i, j] * 100, 1) == 0.0:
-                continue
+                if plot_zero:            
+                    text = ax1.text(j+tpf.column, i+tpf.row, str(0.0),
+                           ha='center', va='center', color='k', zorder=1000, fontsize=10.5)
+                else:
+                    continue
 
             #@|trick to avoid 100.0 values (put instead 100)
             if np.round(CROWDSAP_pixel_by_pixel[i, j] * 100, 1) == 100.0:
@@ -954,23 +972,25 @@ plt.yticks(fontsize=12)
         
 #@|our target star
 if plot_target:
-    plt.scatter(pixel_coords[idx_target][0]+tpf.column, pixel_coords[idx_target][1]+tpf.row,                      s = (scale_factor*table['flux'][idx_target]), c = '#25BDB0', ec = 'k', lw = 1.5,                 alpha = 0.8, zorder = 99, label = target_name)
-        
+#     plt.scatter(pixel_coords[idx_target][0]+tpf.column, pixel_coords[idx_target][1]+tpf.row,                      s = (scale_factor*table['flux'][idx_target]), c = '#25BDB0', ec = 'k', lw = 1.5,                 alpha = 0.8, zorder = 99, label = target_name)
+    plt.scatter(pixel_coords[idx_target][0]+tpf.column, pixel_coords[idx_target][1]+tpf.row,                      s = (scale_factor*table['flux'][idx_target]), c =(37/255, 189/255, 176/255, .7), ec = (0,0,0,.75), lw = 1.5, zorder = 99, label = target_name)
+       
 
 #@|the N most contaminant sources
 if plot_main_contaminants:
-    heat_colors =  get_hex_color_list(num_colors = n_sources+1, saturation = 0.5, value = 1.0)    
+    heat_colors =  get_rgb_color_list(num_colors = n_sources+1, saturation = 0.6, value = 1.0)    
     heat_colors = heat_colors[::-1]
     #heat_colors.pop(0)
     heat_colors.pop(idx_other)
     #for i,index in enumerate(idxs_selected_contaminant_sources):
     for i,index in reversed(list(enumerate(idxs_selected_contaminant_sources))):
-        plt.scatter(pixel_coords_selected[i][0]+tpf.column, pixel_coords_selected[i][1]+tpf.row,                    s = (scale_factor*table['flux'][index]), c = heat_colors[i], alpha = 0.8, ec = 'k',                    zorder = 100000, label = bar_labels[i])      
+        #plt.scatter(pixel_coords_selected[i][0]+tpf.column, pixel_coords_selected[i][1]+tpf.row,                    s = (scale_factor*table['flux'][index]), c = heat_colors[i], alpha = 0.3, ec = 'k',                    zorder = 100000, label = bar_labels[i])     
+        plt.scatter(pixel_coords_selected[i][0]+tpf.column, pixel_coords_selected[i][1]+tpf.row,                    s = (scale_factor*table['flux'][index]), c = (*heat_colors[i], .4), ec = (0,0,0,.5),                    zorder = 100000, label = bar_labels[i]) 
 
 #@|all the remaining Gaia DR3 sources
 if plot_all_gaia:
     for i in range(len(table)):
-        plt.scatter(pixel_coords[i][0]+tpf.column, pixel_coords[i][1]+tpf.row,                    s = (scale_factor*table['flux'][i]), c = 'lightgrey', ec = 'w', alpha = 0.3, zorder = 98)
+        plt.scatter(pixel_coords[i][0]+tpf.column, pixel_coords[i][1]+tpf.row,                    s = (scale_factor*table['flux'][i]), c = (0.827, 0.827, 0.827, .3), ec = (0.827, 0.827, 0.827, 0.15), zorder = 98)
         
     
 plt.ylim(tpf.row+ny-0.5, tpf.row-0.5)
