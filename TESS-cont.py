@@ -215,7 +215,7 @@ try:
 except:
     plot_percentages = True
     
-#@|Overplot when the contamination is 0%
+#@|Explicitly write 0% when there is no contamination (added by YGCF)
 try:
     plot_zero = OPTIONAL['plot_zero'] == 'True'
 except:
@@ -765,7 +765,8 @@ def get_hex_color_list(num_colors=5, saturation=0.4, value=1.0):
         hex_colors.append(f"#{hsv[0]:02x}{hsv[1]:02x}{hsv[2]:02x}")
     
     return hex_colors
-    
+
+#@|Transformation of previous color list (get_hex_color_list) to instead have rgb output (added by YGCF)
 def get_rgb_color_list(num_colors=5, saturation=0.4, value=1.0):
     rgb_colors = []
     hsv_colors = [[float(x / num_colors), saturation, value] for x in range(num_colors)]
