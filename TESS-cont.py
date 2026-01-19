@@ -614,7 +614,6 @@ if save_aper:
 #@|emited by the target star.'FLFRCSAP'only depends on the target star itself.
 
 FLFRCSAP = np.sum(resampled_list[idx_target][aperture_mask])
-print('FLFRCSAP:'+str(FLFRCSAP))
 ###print(f'The FLFRCSAP of TIC {tic} in Sector {sector} is {FLFRCSAP}.')
 #@|total flux of the target star outside the apertue
 #np.sum(resampled_list[idx_target][~tpf.pipeline_mask])
@@ -628,7 +627,6 @@ print('FLFRCSAP:'+str(FLFRCSAP))
 #@|inside the aperture coming from all the sources.'CROWDSAP' depends on the target stars and all nearby sources.
 
 CROWDSAP = np.sum(resampled_list[idx_target][aperture_mask]) / np.sum(resampled[aperture_mask])
-print('CROWDSAP: '+str(CROWDSAP))
 ###print(f'The CROWDSAP of TIC {tic} in Sector {sector} is {CROWDSAP}.')
 
 
