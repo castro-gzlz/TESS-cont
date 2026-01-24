@@ -630,24 +630,37 @@ CROWDSAP = np.sum(resampled_list[idx_target][aperture_mask]) / np.sum(resampled[
 ###print(f'The CROWDSAP of TIC {tic} in Sector {sector} is {CROWDSAP}.')
 
 
-if save_metrics == True:    
+# if save_metrics == True:    
 
-    f = open("metrics.dat", "a+") 
-    with open("metrics.dat", "r") as f:
-        f_read = f.read()
+#     f = open("metrics.dat", "a+") 
+#     with open("metrics.dat", "r") as f:
+#         f_read = f.read()
         
-    with open("metrics.dat", "a+") as f:
+#     with open("metrics.dat", "a+") as f:
 
-        if 'config_file' in f_read:
-            pass
-        if'config_file' not in f_read:
-            f.write('config_file,CROWDSAP,FLFRCSAP \n')
+#         if 'config_file' in f_read:
+#             pass
+#         if'config_file' not in f_read:
+#             f.write('config_file,CROWDSAP,FLFRCSAP \n')
             
-        if config_file in f_read:
-            ###print(f'The CROWDSAP and FLFRCSAP metrics were already computed for {config_file}')
-            pass
-        if config_file not in f_read:
-            f.write(f'{config_file},{CROWDSAP},{FLFRCSAP}'+"\n")
+#         if config_file in f_read:
+#             ###print(f'The CROWDSAP and FLFRCSAP metrics were already computed for {config_file}')
+#             pass
+#         if config_file not in f_read:
+#             f.write(f'{config_file},{CROWDSAP},{FLFRCSAP}'+"\n")
+
+#@| Overwrite metrics.dat to guarantee that CROWDSAP and FLFRCSAP values correspond to the latest .ini file configuration (updated by YGCF)
+if save_metrics:
+    filename = 'metrics.dat'
+
+    if os.path.exists(filename):
+        df = pd.read_csv(filename, index_col='config_file')
+    else:
+        df = pd.DataFrame(columns=['CROWDSAP', 'FLFRCSAP'])
+
+    df.loc[config_file] = [CROWDSAP, FLFRCSAP]
+    
+    df.to_csv(filename, index_label='config_file')
 
         
         
