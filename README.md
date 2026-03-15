@@ -3,7 +3,7 @@
 
 <p>
 
-  <img src="misc/image.png"
+  <img src="misc/logo.png"
        align="left"
        width="320"
        style="margin-right: 20px; margin-bottom: 10px;">
