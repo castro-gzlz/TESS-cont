@@ -3,7 +3,7 @@
 
 <p>
 
-  <img src="https://github.com/user-attachments/assets/f0c2132b-eaba-4eb7-bd75-d0c2af2575fb"
+  <img src="misc/image.png"
        align="left"
        width="320"
        style="margin-right: 20px; margin-bottom: 10px;">
