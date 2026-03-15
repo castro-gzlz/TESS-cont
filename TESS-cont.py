@@ -44,7 +44,7 @@ from astropy.visualization.mpl_normalize import ImageNormalize
 
 #@|Uncomment this line for the tess-cont.ipynb version
 #@|#####--Configuration file--#########
-#config_file = 'TOI-5005_S65.in'
+#config_file = 'TOI-5005_S65.ini'
 #@|####################################
 
 
@@ -57,12 +57,12 @@ parser.add_argument('config_file')
 args = parser.parse_args()
 config_file = args.config_file
 
-warnings.filterwarnings("ignore")
-print("")
-print("@|---------------------@|")
-print("        TESS-cont       ")
-print("@|---------------------@|")
-print("")
+#warnings.filterwarnings("ignore")
+#print("")
+#print("@|---------------------@|")
+#print("        TESS-cont       ")
+#print("@|---------------------@|")
+#print("")
 
 
 # In[ ]:
@@ -137,7 +137,8 @@ except:
     
 try:
     cutout_size = OPTIONAL['cutout_size']
-    cutout_size = (int(cutout_size.split(',')[0]),                    int(cutout_size.split(',')[1]))
+    cutout_size = (int(cutout_size.split(',')[0]), \
+                   int(cutout_size.split(',')[1]))
 except:
     cutout_size = (11,11) #@|similar to a tpf
     
@@ -156,7 +157,12 @@ except:
 try:
     scale_heatmap = OPTIONAL['scale_heatmap']
 except:
-    scale_heatmap = 'natural'
+    scale_heatmap = 'log'
+
+try:
+    colormap = OPTIONAL['colormap']
+except:
+    colormap = 'viridis'
     
 #@|number of contaminant sources to consider individually
 #@|(for the pie chart and heatmap)    
@@ -215,12 +221,6 @@ try:
 except:
     plot_percentages = True
     
-#@|Explicitly write 0% when there is no contamination (added by YGCF)
-try:
-    plot_zero = OPTIONAL['plot_zero'] == 'True'
-except:
-    plot_zero = True
-    
 #@|scale factor for the stars. Disk area scales with flux emission
 try:
     scale_factor = float(OPTIONAL['scale_factor'])
@@ -228,9 +228,9 @@ except:
     scale_factor = 4000
     
     
-#@|-----------------------------------------------------------------------------------------------
-#@|APERTURE arguments | not documented. For details, please email me at acastro@cab.inta-csic.es
-#@|------------------------------------------------------------------------------------------------  
+#@|-----------------------------------------------------------------------------------------------------
+#@|APERTURE arguments | not documented. For details, please email me at amadeo.castro-gonzalez@unige.ch
+#@|-----------------------------------------------------------------------------------------------------
 
 #@|aperture: pipeline, threshold_target_flux, or threshold_median_flux
 try:
@@ -295,12 +295,6 @@ except:
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
 #@|------------------------------------------------------------------------------------------
 #@|we download the tpf (or tesscut) of the target to build the pixel response function (PRF).
 #@|------------------------------------------------------------------------------------------
@@ -323,8 +317,10 @@ if tpf_or_tesscut == 'tpf':
     tic = tpf.targetid
     if len(search_result) == 0:
         try:
-            print(f'Error: There is not a target pixel file for TIC {tic} (sector {sector}).            You can try with a tesscut on the FFIs!')
-        except NameError: print(f'Error: There is not a target pixel file for TIC {tic}.            You can try with a tesscut on the FFIs!')
+            print(f'Error: There is not a target pixel file for TIC {tic} (sector {sector}).\
+            You can try with a tesscut on the FFIs!')
+        except NameError: print(f'Error: There is not a target pixel file for TIC {tic}.\
+            You can try with a tesscut on the FFIs!')
         sys.exit()
 
 #@|+++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -333,7 +329,8 @@ if tpf_or_tesscut == 'tpf':
 if tpf_or_tesscut == 'tesscut':
     try:
         search_result = lk.search_tesscut(str(target), sector = int(sector))
-    except NameError: search_result = lk.search_tesscut(str(target))
+    except NameError:
+        search_result = lk.search_tesscut(str(target))
     tpf = search_result.download(cutout_size = cutout_size)
     tic = tpf.targetid
     if len(search_result) == 0:
@@ -346,15 +343,7 @@ if tpf_or_tesscut == 'tesscut':
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
-#@|modified from tpfplotter (J.Lillo-Box)
-#@|https://github.com/jlillo/tpfplotter
-
+#@|modified from tpfplotter (https://github.com/jlillo/tpfplotter)
 def get_gaia_data(ra, dec, search_radius=250):
     c1 = SkyCoord(ra, dec, frame='icrs', unit='deg')
     from astroquery.vizier import Vizier
@@ -399,14 +388,7 @@ print(f'There are {len(table)} stars surrounding {target_name} within a radius o
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
-#@|from tpfplotter (J.Lillo-Box)
-#@|https://github.com/jlillo/tpfplotter
+#@|modified from tpfplotter (https://github.com/jlillo/tpfplotter)
 def get_dr2_id_from_tic(tic):
     # Get the Gaia sources
     result = Catalogs.query_object('TIC'+tic, radius=.005, catalog="TIC")
@@ -441,17 +423,10 @@ idx_target = np.where(table['Source'] == gaia_dr3_target)[0][0]
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
 #@|we create a new column within 'table' called 'flux', in which we estimate, based on their G magnitudes, 
 #@|the flux of each star with respect to the flux of our target: flux = f_star/f_target. 
 #@|to do so, we used the following relation:
-#@|f_star/f_target = 100**((m_target-m_star)/5)    
-#@|from http://burro.case.edu/Academics/Astr221/Light/magscale.html
+#@|f_star/f_target = 100**((m_target-m_star)/5)
 
 flux_col = np.zeros(len(table))
 for i in range(len(table)):
@@ -467,7 +442,8 @@ table['flux'] = flux_col
 #@|the pixel coordinates are used to:
 #@|1) get the colnum and rownum of each source (to get the proper PRF)
 #@|2) overplot the sources over the PRF plot.
-print(f'Extracting the Gaia {gaia_catalog} coordinates of the nearby targets and converting them into pixel coordinates ... ')
+print(f'Extracting the Gaia {gaia_catalog} coordinates of the nearby targets \
+and converting them into pixel coordinates ... ')
 coords = []
 pixel_coords = []
 
@@ -483,7 +459,9 @@ t_inc = (tpf.time[0].jd - t_reference) / 365  #year
 for i in tqdm(range(len(table))):
     
     #coords_ac = SkyCoord(table[i]['RA_ICRS'], table[i]['DE_ICRS'], unit="deg") # OLD --- no pm correction ---
-    coords_ac = SkyCoord(table[i]['RA_ICRS']+np.nan_to_num(table['pmRA'].value.data[i]) / 3600000 * t_inc,                         table[i]['DE_ICRS']+np.nan_to_num(table['pmDE'].value.data[i]) / 3600000 * t_inc,                         unit="deg")  # defaults to ICRS frame | includes pm correction
+    coords_ac = SkyCoord(table[i]['RA_ICRS']+np.nan_to_num(table['pmRA'].value.data[i]) / 3600000 * t_inc,\
+                         table[i]['DE_ICRS']+np.nan_to_num(table['pmDE'].value.data[i]) / 3600000 * t_inc,\
+                         unit="deg")  # defaults to ICRS frame | includes pm correction
     pixel_coords_ac = wcs.utils.skycoord_to_pixel(coords_ac, tpf.wcs, origin = 0, mode='all')
     coords.append(coords_ac)
     pixel_coords.append(pixel_coords_ac)
@@ -557,7 +535,8 @@ if method_prf == 'accurate':
 
         #@|we resample the PRF into the shape of the original tpf
         try:
-            resampled_ac = prf_array[idx].locate(pixel_coords[i][0], pixel_coords[i][1],                                                  table['flux'][i], tpf.shape[1:3])
+            resampled_ac = prf_array[idx].locate(pixel_coords[i][0], pixel_coords[i][1], \
+                                                 table['flux'][i], tpf.shape[1:3])
         except:
             #@|this exception occours when there are Gaia sources too far away 
             resampled_ac = np.zeros(tpf.shape[1:3]) 
@@ -596,9 +575,11 @@ if aperture == 'threshold_target_flux':
 #@|we save te aperture in a .csv file#@|
 if save_aper:
     if aperture == 'threshold_target_flux':
-        pd.DataFrame(aperture_mask).to_csv(f'output/{target_name}/{target_name}_S{sector}_aperture_{aperture}_{threshold_target}.csv',                                        index = False)
+        pd.DataFrame(aperture_mask).to_csv(f'output/{target_name}/{target_name}_S{sector}_aperture_{aperture}_{threshold_target}.csv', \
+                                       index = False)
     if aperture == 'threshold_median_flux':
-        pd.DataFrame(aperture_mask).to_csv(f'output/{target_name}/{target_name}_S{sector}_aperture_{aperture}_{threshold_median}.csv',                                        index = False)   
+        pd.DataFrame(aperture_mask).to_csv(f'output/{target_name}/{target_name}_S{sector}_aperture_{aperture}_{threshold_median}.csv', \
+                                       index = False)   
         
     #@|open as (e.g) aperture_mask = np.array(pd.read_csv('TIC_282485660_S12_aperture_threshold_median_flux_3.csv'))
 
@@ -630,25 +611,6 @@ CROWDSAP = np.sum(resampled_list[idx_target][aperture_mask]) / np.sum(resampled[
 ###print(f'The CROWDSAP of TIC {tic} in Sector {sector} is {CROWDSAP}.')
 
 
-# if save_metrics == True:    
-
-#     f = open("metrics.dat", "a+") 
-#     with open("metrics.dat", "r") as f:
-#         f_read = f.read()
-        
-#     with open("metrics.dat", "a+") as f:
-
-#         if 'config_file' in f_read:
-#             pass
-#         if'config_file' not in f_read:
-#             f.write('config_file,CROWDSAP,FLFRCSAP \n')
-            
-#         if config_file in f_read:
-#             ###print(f'The CROWDSAP and FLFRCSAP metrics were already computed for {config_file}')
-#             pass
-#         if config_file not in f_read:
-#             f.write(f'{config_file},{CROWDSAP},{FLFRCSAP}'+"\n")
-
 #@| Overwrite metrics.dat to guarantee that CROWDSAP and FLFRCSAP values correspond to the latest .ini file configuration (updated by YGCF)
 if save_metrics:
     filename = 'metrics.dat'
@@ -659,11 +621,8 @@ if save_metrics:
         df = pd.DataFrame(columns=['CROWDSAP', 'FLFRCSAP'])
 
     df.loc[config_file] = [CROWDSAP, FLFRCSAP]
-    
-    df.to_csv(filename, index_label='config_file')
 
-        
-        
+    df.to_csv(filename, index_label='config_file')
 
 
 # In[ ]:
@@ -764,9 +723,8 @@ bar_labels.append('Other')
 # In[ ]:
 
 
-#@|This is to generate fancy color palettes
+#@|Generate fancy color palettes
 #@|from https://stackoverflow.com/questions/876853/generating-color-ranges-in-python
-#from colorsys import hsv_to_rgb  (moved up)
 def get_hex_color_list(num_colors=5, saturation=0.4, value=1.0):
     hex_colors = []
     hsv_colors = [[float(x / num_colors), saturation, value] for x in range(num_colors)]
@@ -817,7 +775,8 @@ explode = [0.5, 0]
 angle = -180 * pie_ratios[0]
 #wedges, *_ = ax1.pie(pie_ratios, autopct='%1.1f%%', textprops = {'size': '21'}, startangle=angle,
                      #labels=pie_labels, explode=explode, colors = pie_colors, radius = 6)
-wedges, *_ = ax1.pie(pie_ratios, startangle=angle, explode=explode,                      colors = pie_colors, radius = 6, labels = pie_labels)
+wedges, *_ = ax1.pie(pie_ratios, startangle=angle, explode=explode, \
+                     colors = pie_colors, radius = 6, labels = pie_labels)
 
 #@|-----------------------Pie chart percentages inside the pie------------------------
 #@|+++Nearby stars+++
@@ -865,7 +824,8 @@ idx_other = np.where(np.array(labels_ordered) == 'Other')[0][0] #idxs of 'Other'
 
 #ax1.set_title('Contaminant flux', fontsize = 14)
 #ax2.legend(bbox_to_anchor=(0.462,0.865), loc="upper left",  bbox_transform=fig.transFigure, fontsize = 15)
-ax2.legend(bbox_to_anchor=(0.420,1.422), loc="upper left",            bbox_transform=fig.transFigure, fontsize = 18, framealpha=0.8)
+ax2.legend(bbox_to_anchor=(0.420,1.422), loc="upper left", \
+           bbox_transform=fig.transFigure, fontsize = 18, framealpha=0.8)
 ax2.axis('off')
 #ax2.set_xlim(- 2.5 * width, 2.5 * width)
 ax2.set_xlim(- 1 , 0.3)
@@ -900,18 +860,14 @@ con.set_linewidth(2)
 #|----------------------
 
 if img_fmt == 'pdf' or img_fmt == 'pdfpng':
-    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_piechart.pdf',                bbox_inches = 'tight', pad_inches = 0)
+    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_piechart.pdf',\
+                bbox_inches = 'tight', pad_inches = 0)
 if img_fmt == 'png'or img_fmt == 'pdfpng':
-    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_piechart.png',                bbox_inches = 'tight', dpi = 400, pad_inches = 0)
+    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_piechart.png',\
+                bbox_inches = 'tight', dpi = 400, pad_inches = 0)
     
 #print('')
 print('\033[1m' + f'Your pie chart {target_name}_S{sector}_piechart.pdf/png has been successfully generated and saved'+'\033[0m')
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -930,17 +886,18 @@ maskcolor = 'red'
 if scale_heatmap == 'natural':
     norm = ImageNormalize(vmin = 0, vmax = 100)
 else:
-    norm = ImageNormalize(stretch=stretching.LogStretch(), vmin = 0.1, vmax = 99)                               
+    norm = ImageNormalize(stretch=stretching.LogStretch(), vmin = 0.1, vmax = 99)                                 
 
-splot = plt.imshow(CROWDSAP_pixel_by_pixel*100,                   zorder=0,alpha =1, 
-          extent=[tpf.column-0.5,tpf.column+nx-0.5,tpf.row+ny-0.5,tpf.row-0.5], norm = norm, cmap = 'viridis')
+splot = plt.imshow(CROWDSAP_pixel_by_pixel*100,\
+                   zorder=0,alpha =1, 
+          extent=[tpf.column-0.5,tpf.column+nx-0.5,tpf.row+ny-0.5,tpf.row-0.5], norm = norm, cmap = colormap)
 
 
 for i in range(aperture_mask.shape[0]):
     for j in range(aperture_mask.shape[1]):
         if aperture_mask[i, j]:
             ax1.add_patch(patches.Rectangle((j+tpf.column-0.5, i+tpf.row-0.5),
-                                            1, 1, color=maskcolor, fill=True,alpha=0.5))
+                                            1, 1, color=maskcolor, fill=True,alpha=0.3))
             ax1.add_patch(patches.Rectangle((j+tpf.column-0.5, i+tpf.row-0.5), 
                                             1, 1, color=maskcolor, fill=False,alpha=1,lw=2))
                     
@@ -949,12 +906,6 @@ if plot_percentages:
                     
     for i in range(tpf.shape[1]):
         for j in range(tpf.shape[2]):
-            if np.round(CROWDSAP_pixel_by_pixel[i, j] * 100, 1) == 0.0:
-                if plot_zero:            
-                    text = ax1.text(j+tpf.column, i+tpf.row, str(0.0),
-                           ha='center', va='center', color='k', zorder=1000, fontsize=10.5)
-                else:
-                    continue
 
             #@|trick to avoid 100.0 values (put instead 100)
             if np.round(CROWDSAP_pixel_by_pixel[i, j] * 100, 1) == 100.0:
@@ -985,25 +936,33 @@ plt.yticks(fontsize=12)
         
 #@|our target star
 if plot_target:
-#     plt.scatter(pixel_coords[idx_target][0]+tpf.column, pixel_coords[idx_target][1]+tpf.row,                      s = (scale_factor*table['flux'][idx_target]), c = '#25BDB0', ec = 'k', lw = 1.5,                 alpha = 0.8, zorder = 99, label = target_name)
-    plt.scatter(pixel_coords[idx_target][0]+tpf.column, pixel_coords[idx_target][1]+tpf.row,                      s = (scale_factor*table['flux'][idx_target]), c =(37/255, 189/255, 176/255, .7), ec = (0,0,0,.75), lw = 1.5, zorder = 99, label = target_name)
-       
+    plt.scatter(pixel_coords[idx_target][0]+tpf.column, pixel_coords[idx_target][1]+tpf.row, \
+                     s = (scale_factor*table['flux'][idx_target]), c = '#25BDB0', ec = 'k', lw = 1.5, \
+                alpha = 0.8, zorder = 99, label = target_name)
+        
 
 #@|the N most contaminant sources
 if plot_main_contaminants:
-    heat_colors =  get_rgb_color_list(num_colors = n_sources+1, saturation = 0.6, value = 1.0)    
+    heat_colors =  get_hex_color_list(num_colors = n_sources+1, saturation = 0.5, value = 1.0)
+    #heat_colors =  get_rgb_color_list(num_colors = n_sources+1, saturation = 0.6, value = 1.0)
     heat_colors = heat_colors[::-1]
     #heat_colors.pop(0)
     heat_colors.pop(idx_other)
     #for i,index in enumerate(idxs_selected_contaminant_sources):
     for i,index in reversed(list(enumerate(idxs_selected_contaminant_sources))):
-        #plt.scatter(pixel_coords_selected[i][0]+tpf.column, pixel_coords_selected[i][1]+tpf.row,                    s = (scale_factor*table['flux'][index]), c = heat_colors[i], alpha = 0.3, ec = 'k',                    zorder = 100000, label = bar_labels[i])     
-        plt.scatter(pixel_coords_selected[i][0]+tpf.column, pixel_coords_selected[i][1]+tpf.row,                    s = (scale_factor*table['flux'][index]), c = (*heat_colors[i], .4), ec = (0,0,0,.5),                    zorder = 100000, label = bar_labels[i]) 
+        plt.scatter(pixel_coords_selected[i][0]+tpf.column, pixel_coords_selected[i][1]+tpf.row,\
+                    s = (scale_factor*table['flux'][index]), c = heat_colors[i], alpha = 0.6, ec = 'k', \
+                   zorder = 100000, label = bar_labels[i])      
 
 #@|all the remaining Gaia DR3 sources
 if plot_all_gaia:
     for i in range(len(table)):
-        plt.scatter(pixel_coords[i][0]+tpf.column, pixel_coords[i][1]+tpf.row,                    s = (scale_factor*table['flux'][i]), c = (0.827, 0.827, 0.827, .3), ec = (0.827, 0.827, 0.827, 0.15), zorder = 98)
+        plt.scatter(pixel_coords[i][0]+tpf.column, pixel_coords[i][1]+tpf.row,\
+                    s = (scale_factor*table['flux'][i]), c = 'lightgrey', ec = 'w', alpha = 0.3, zorder = 98)
+
+        #plt.scatter(pixel_coords[i][0]+tpf.column, pixel_coords[i][1]+tpf.row,
+            #s = (scale_factor*table['flux'][i]), c = (0.827, 0.827, 0.827, .3),
+            #ec = (0.827, 0.827, 0.827, 0.15), zorder = 98)
         
     
 plt.ylim(tpf.row+ny-0.5, tpf.row-0.5)
@@ -1017,7 +976,8 @@ legend_marker_size = 60
 def updatescatter(handle, orig):
     handle.update_from(orig)
     handle.set_sizes([legend_marker_size])
-plt.legend(loc = loc_legend, handler_map={PathCollection : HandlerPathCollection(update_func=updatescatter)},           framealpha=0.9, fontsize = 12).set_zorder(10000)
+plt.legend(loc = loc_legend, handler_map={PathCollection : HandlerPathCollection(update_func=updatescatter)},\
+           framealpha=0.9, fontsize = 12).set_zorder(10000)
 
 #@|--------
 #@|COLORBAR
@@ -1045,18 +1005,14 @@ else:
 
 
 if img_fmt == 'pdf' or img_fmt == 'pdfpng':
-    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_heatmap.pdf',                 bbox_inches = 'tight', pad_inches = 0)
+    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_heatmap.pdf', \
+                bbox_inches = 'tight', pad_inches = 0)
 if img_fmt == 'png' or img_fmt == 'pdfpng':
-    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_heatmap.png',                 bbox_inches = 'tight', pad_inches = 0, dpi = 400)
+    plt.savefig(f'output/{target_name}/{target_name}_S{sector}_heatmap.png', \
+                bbox_inches = 'tight', pad_inches = 0, dpi = 400)
     
 #print('')
 print('\033[1m' + f'Your heatmap {target_name}_S{sector}_heatmap.pdf/png has been successfully generated and saved'+'\033[0m')  
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -1090,12 +1046,6 @@ print('\033[1m' + f'Your heatmap {target_name}_S{sector}_heatmap.pdf/png has bee
 # In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
 f = open(f'output/{target_name}/{target_name}_S{sector}_contaminant_sources.dat', 'w+')
 
 header = ['Star,Gaia_ID,total_cont(%),rel_cont(%) \n']
@@ -1106,7 +1056,8 @@ for i in range(n_sources):
     crowdsap_sorted_ac = crowdsap_sorted[-n_sources:][::-1][i] * 100 #(in %)
     total_cont_ac = relative_contam_sorted[:n_sources][i] * 100 #(in %)
     
-    L = [str(i+1)+','+str(gaia_names_selected[i])+','+str(round(crowdsap_sorted_ac, 4))         +','+str(round(total_cont_ac, 4))+'\n']
+    L = [str(i+1)+','+str(gaia_names_selected[i])+','+str(round(crowdsap_sorted_ac, 4))\
+         +','+str(round(total_cont_ac, 4))+'\n']
     f.writelines(L)
     
 #####################---rep---###############   
@@ -1121,7 +1072,8 @@ for i in range(n_sources):
     crowdsap_sorted_ac = crowdsap_sorted[-n_sources:][::-1][i] * 100 #(in %)
     total_cont_ac = relative_contam_sorted[:n_sources][i] * 100 #(in %)
     
-    L = [str(i+1)+','+str(gaia_names_selected[i])+','+str(round(crowdsap_sorted_ac, 4))         +','+str(round(total_cont_ac, 4))+'\n']
+    L = [str(i+1)+','+str(gaia_names_selected[i])+','+str(round(crowdsap_sorted_ac, 4))\
+         +','+str(round(total_cont_ac, 4))+'\n']
     f.writelines(L)
     
 
@@ -1226,25 +1178,20 @@ if transit_depth_analysis:
         
     print('\033[1m' + f'The transit depth analysis has been saved in {target_name}_S{sector}_undituled_transit_depths.dat ')
     print('\033[0m')
-    print('     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
-    print('      Thank you for using TESS-cont :-D We hope to see you again soon!')
-    print('     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+    print('     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+    print('      Thank you for using TESS-cont! We hope it was helpful.')
+    print('     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
     print('')
         
         
 else:
     
     print('')
-    print('     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
-    print('      Thank you for using TESS-cont :-D We hope to see you again soon!')
-    print('     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+    print('     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+    print('      Thank you for using TESS-cont! We hope it was helpful.')
+    print('     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
     print('')
-
-
-# In[ ]:
-
-
-
+    print('')
 
 
 # In[ ]:
