@@ -52,8 +52,6 @@ python TESS-cont.py TOI-5005_S65.ini
 
 ![Figure 1](misc/example1.png)
 
-![example1](https://github.com/user-attachments/assets/a7ca5fdb-b297-4f37-9a0a-a455454e2c75)
-
 
 The left-hand plot is a **heatmap** indicating **the flux percentage from the target star** falling within each pixel. As we can see, inside the aperture, TOI-5005 contributes between **60%** and **90%** of the total flux, depending on the considered pixel. The disk sizes are scaled to the emitted fluxes. 
 
