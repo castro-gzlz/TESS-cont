@@ -50,6 +50,8 @@ In this example, we specify the **TIC number** of TOI-5005 (TIC 282485660) to qu
 python TESS-cont.py TOI-5005_S65.ini
 ```
 
+![Figure 1](misc/example1.png)
+
 ![example1](https://github.com/user-attachments/assets/a7ca5fdb-b297-4f37-9a0a-a455454e2c75)
 
 
