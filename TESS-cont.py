@@ -318,7 +318,10 @@ if tpf_or_tesscut == 'tpf':
         #search_result = lk.search_targetpixelfile('TIC '+str(tic), sector = int(sector))
         search_result = lk.search_targetpixelfile(str(target), sector = int(sector))
     except NameError: search_result = lk.search_targetpixelfile(str(target))
-    tpf = search_result.download()
+	try: 
+    	tpf = search_result[search_result.author == 'TESS-SPOC'].download()
+	except:
+		tpf = search_result.download()
     tic = tpf.targetid
     if len(search_result) == 0:
         try:
