@@ -134,6 +134,12 @@ This approximate method **typically provides very similar results** to the defau
 | td_unit | ppm, ppt, per, frac | Unit of the measured transit depth |
 | dilution_corr | True or False | The measured depth is corrected for dilution (e.g. SPOC). **Default**: True  |
 
+## Examples in the literature
+
+A non-exhaustive list of papers using or citing *TESS-cont* is available in this [ADS library](https://ui.adsabs.harvard.edu/public-libraries/GsvUiL1pQti3uczsgyTR_Q). At the moment, it includes 22 papers with a variety of applications and observing contexts.
+
+These papers may be useful as practical examples of how to report contamination analyses, interpret the resulting figures, and combine *TESS-cont* outputs with follow-up observations.
+
 ## Credits
 
 If you use *TESS-cont*, please give credit to [this work](https://ui.adsabs.harvard.edu/abs/2024arXiv240918129C/abstract): 
