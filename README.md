@@ -136,7 +136,7 @@ This approximate method **typically provides very similar results** to the defau
 
 ## Examples in the literature
 
-A list of papers using *TESS-cont* is available in this [ADS library](https://ui.adsabs.harvard.edu/public-libraries/GsvUiL1pQti3uczsgyTR_Q). At the moment, it includes 22 papers with a variety of applications and observing contexts.
+A list of papers using *TESS-cont* is available in this [ADS library](https://ui.adsabs.harvard.edu/public-libraries/GsvUiL1pQti3uczsgyTR_Q). At the moment, it includes 22 works with a variety of applications and observing contexts.
 
 These papers may be useful as practical examples of how to report contamination analyses, interpret the resulting figures, and combine *TESS-cont* outputs with follow-up observations.
 
