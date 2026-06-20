@@ -191,6 +191,11 @@ try:
     plot_target_name = OPTIONAL['plot_target_name'] == 'True'
 except:
     plot_target_name = False
+
+try:
+    TACO = OPTIONAL['TACO'] == 'True'
+except:
+    TACO = False
     
     
 #@|---------(HEATMAP arguments)-------------
@@ -313,7 +318,10 @@ if tpf_or_tesscut == 'tpf':
         #search_result = lk.search_targetpixelfile('TIC '+str(tic), sector = int(sector))
         search_result = lk.search_targetpixelfile(str(target), sector = int(sector))
     except NameError: search_result = lk.search_targetpixelfile(str(target))
-    tpf = search_result.download()
+	try: 
+    	tpf = search_result[search_result.author == 'TESS-SPOC'].download()
+	except:
+		tpf = search_result.download()
     tic = tpf.targetid
     if len(search_result) == 0:
         try:
@@ -555,6 +563,15 @@ CROWDSAP_pixel_by_pixel = resampled_list[idx_target] / resampled
 
 # In[ ]:
 
+#@|-----TACO----|
+if TACO:
+	if not os.path.isdir('output/TACO/'):
+		os.mkdir('output/TACO/')
+	if not os.path.isdir(f'output/TACO/{target_name}/'):
+		os.mkdir(f'output/TACO/{target_name}/')
+	pd.DataFrame(resampled).to_csv(f'output/TACO/{target_name}/{target_name}_S{sector}_{tpf_or_tesscut}_resampled.csv', index=False)
+	pd.DataFrame(resampled_list[idx_target]).to_csv(f'output/TACO/{target_name}/{target_name}_S{sector}_{tpf_or_tesscut}_resampled_list.csv', index=False)
+    
 
 #@|-----------------------------------------#@|
 #@|---We select/create the proper apeture---#@|
